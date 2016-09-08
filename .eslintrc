@@ -1,0 +1,21 @@
+
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+
+  "plugins": ["react"],
+
+  "env": {},
+
+  "globals": {
+    "_": true,
+   },
+
+  "rules": {
+     "no-multi-spaces": 0,
+     "react/jsx-boolean-value": 0,
+     "object-shorthand": 0,
+     "no-param-reassign": 0,
+     "maximumLineLength": 0
+  }
+}
