@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 var ReactTHREE = require('react-three')
-var THREE =require('three')
-import Camera from './Camera'
+import Camera from '../containers/Camera'
 var Renderer = ReactTHREE.Renderer;
 var Scene = ReactTHREE.Scene;
 
@@ -13,11 +12,30 @@ const GameScene = React.createClass({
         console.log("rendering game scene",this.props);
         return <Renderer width={this.props.width} height={this.props.height}>
             <Scene width={this.props.width} height={this.props.height} camera="maincamera">
-                <Camera aspect={this.props.width / this.props.height}></Camera>
+                <Camera />
                 {this.props.children}
             </Scene>
         </Renderer>;
     },
 })
 
+/*
+const GameScene =(width,height,children)=>{
+    console.log("children",children);
+        return <Renderer width={width} height={height}>
+            <Scene width={width} height={height} camera="maincamera">
+                <div>
+                    <Camera/>
+                    {children}
+                </div>
+            </Scene>
+        </Renderer>;
+}
+
+GameScene.propTypes = {
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+    children: PropTypes.node.isRequired
+}
+*/
 export default GameScene

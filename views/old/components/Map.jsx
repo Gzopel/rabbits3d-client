@@ -4,7 +4,11 @@ const THREE =require('three')
 const Object3D = ReactTHREE.Object3D;
 const Mesh = ReactTHREE.Mesh;
 
-const Map = ()=>{
+const Map = React.createClass({
+    getInitialState() {
+        return {};
+    },
+    render() {
         let material = new THREE.MeshBasicMaterial({
             color:0x00ff00,
             side: THREE.DoubleSide
@@ -27,7 +31,7 @@ const Map = ()=>{
                     <Mesh position={position} geometry={geometry} material={material} />
                 </Object3D>)
 
-
-}
+    }
+})
 
 export default Map
