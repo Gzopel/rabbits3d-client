@@ -1,21 +1,22 @@
 module.exports = {
-    entry: ['./views/index.js'],
+  entry: ['./views/index.js'],
 
-    output: {
-        filename: 'bundle.js',
-        path: __dirname + '/public'
-    },
+  output: {
+    filename: 'bundle.js',
+    path: __dirname + '/public',
+  },
 
-    resolve: {
-        extensions: ['', '.js', '.jsx']
-    },
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+    modulesDirectories: ['node_modules'],
+  },
 
-    module: {
-        loaders: [{
-            test: /\.jsx?$/,
-            exclude: /node_modules/,
-            loader: 'babel-loader?presets[]=es2015&presets[]=react',
-            plugins: ['transform-runtime']
-        }]
-    }
-}
+  module: {
+    loaders: [{
+      test: /\.jsx?$/,
+      exclude: /node_modules/,
+      loader: 'babel-loader?presets[]=es2015&presets[]=react',
+      plugins: ['transform-runtime'],
+    }],
+  },
+};
