@@ -1,18 +1,17 @@
-import React from 'react'
-import GameScene from './GameScene'
-import Map from './Map'
-import Character from './Character.jsx'
+import React from 'react';
+import Map from './Map';
+import GameScene from './GameScene';
+import Character from './Character';
 
 const Game = () => {
-    return (
-        <GameScene width={window.innerWidth} height={window.innerHeight}>
-            <div>
-                <Map/>
-                <Character/>
-            </div>
-        </GameScene>
-    )
-}
+  return (
+    <GameScene width={window.innerWidth} height={window.innerHeight}>
+      <div>
+        <Map />
+        <Character />
+      </div>
+    </GameScene>
+  );
+};
 
-
-export default Game
+export default Game;

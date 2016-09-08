@@ -1,41 +1,26 @@
-import React, { PropTypes } from 'react'
-var ReactTHREE = require('react-three')
-import Camera from '../containers/Camera'
-var Renderer = ReactTHREE.Renderer;
-var Scene = ReactTHREE.Scene;
+import React from 'react';
+import Camera from '../containers/Camera';
 
-const GameScene = React.createClass({
-    getInitialState() {
-        return {};
-    },
-    render() {
-        console.log("rendering game scene",this.props);
-        return <Renderer width={this.props.width} height={this.props.height}>
-            <Scene width={this.props.width} height={this.props.height} camera="maincamera">
-                <Camera />
-                {this.props.children}
-            </Scene>
-        </Renderer>;
-    },
-})
+const ReactTHREE = require('react-three');
 
-/*
-const GameScene =(width,height,children)=>{
-    console.log("children",children);
-        return <Renderer width={width} height={height}>
-            <Scene width={width} height={height} camera="maincamera">
-                <div>
-                    <Camera/>
-                    {children}
-                </div>
-            </Scene>
-        </Renderer>;
-}
+const Renderer = ReactTHREE.Renderer;
+const Scene = ReactTHREE.Scene;
+
+const GameScene = ({ width, height, children }) => {
+  return (
+    <Renderer width={width} height={height}>
+      <Scene width={width} height={height} camera="maincamera">
+        <Camera />
+        {children}
+      </Scene>
+    </Renderer>
+  );
+};
 
 GameScene.propTypes = {
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    children: PropTypes.node.isRequired
-}
-*/
-export default GameScene
+  width: React.PropTypes.number.isRequired,
+  height: React.PropTypes.number.isRequired,
+  children: React.PropTypes.node.isRequired,
+};
+
+export default GameScene;
