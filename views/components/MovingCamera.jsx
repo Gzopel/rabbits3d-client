@@ -1,25 +1,31 @@
 import React from 'react';
+import { cameraRotation } from '../actions/Camera';
 
 const ReactTHREE = require('react-three');
 
-import { cameraRotation } from '../actions/Camera';
+const PerspectiveCamera = ReactTHREE.PerspectiveCamera;
 
-var PerspectiveCamera = ReactTHREE.PerspectiveCamera;
+class MovingCamera extends React.Component {
+  componentDidMount = () => {
+    // TODO: Move browser events to browser action/reducer
+    window.addEventListener('keypress', this.rotateCamera);
+  };
 
-let dispatcher;
-//document.onkeypress = (oPEvt) => { //shouldnt this be on the container? =/
-//  if (!dispatcher)
-//    return;
-//  var oEvent = oPEvt || window.event, charCode = oEvent.charCode;
-//  if (charCode == 105 || charCode == 106 || charCode == 107 || charCode == 108 || charCode == 13)
-//    dispatcher(cameraRotation(charCode))
-//};
+  componentWillUnmount = () => {
+    // TODO: Move browser events to browser action/reducer
+    window.removeEventListener('keypress', this.rotateCamera);
+  };
 
-const MovingCamera = ({ config, dispatch }) => {
-  return (
-    <PerspectiveCamera name="maincamera" {...config} />
-  );
-};
+  rotateCamera = (event) => {
+    this.props.dispatch(cameraRotation(event.keyCode));
+  };
+
+  render() {
+    return (
+      <PerspectiveCamera name="maincamera" {...this.props.config} />
+    );
+  }
+}
 
 MovingCamera.propTypes = {
   config: React.PropTypes.shape({

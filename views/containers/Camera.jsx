@@ -11,10 +11,7 @@ const mapStateToProps = (state) => {
       near: 1,
       far: 800,
       position: new THREE.Vector3(400, 0, 400),
-      // who needs an initial state?
-      lookat: state.rotationVector ?
-        new THREE.Vector3(0, 0, 0).add(state.rotationVector) :
-        new THREE.Vector3(0, 0, 0),
+      lookat: state.Camera.rotationVector,
     },
   };
 };
