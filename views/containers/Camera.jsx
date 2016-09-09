@@ -19,8 +19,16 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch: dispatch,
+  };
+};
+
+
 const Camera = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(MovingCamera);
 
 export default Camera;

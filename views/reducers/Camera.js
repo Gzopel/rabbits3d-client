@@ -1,3 +1,5 @@
+import ACTIONS from '../actions';
+
 const Three = require('three');
 
 const mapRotationToVector = (rotation) => {
@@ -13,19 +15,19 @@ const mapRotationToVector = (rotation) => {
     default:
       return new Three.Vector3(0, 0, 0);
   }
-}
+};
 
-//TODO: Add factory for Three Objects
+// TODO: Add factory for Three Objects
 
 const CameraReducer = (state = new Three.Vector3(0, 0, 0), action) => {
   switch (action.type) {
-    case 'ROTATE_CAMERA':
+    case ACTIONS.CAMERA.ROTATE:
       return {
-        rotationVector: state.rotationVector.add(mapRotationToVector(action.rotation))
-      }
+        rotationVector: state.rotationVector.add(mapRotationToVector(action.rotation)),
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export default CameraReducer;

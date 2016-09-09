@@ -18,11 +18,9 @@ const mapCharToRotation = (key) => {
   }
 };
 
-const cameraRotation = (key) => {
+export const cameraRotation = (key) => {
   return {
     type: ACTIONS.CAMERA.ROTATE,
     rotation: mapCharToRotation(key),
   };
 };
-
-export default cameraRotation;
