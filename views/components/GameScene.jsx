@@ -20,7 +20,7 @@ const GameScene = ({ width, height, children }) => {
 GameScene.propTypes = {
   width: React.PropTypes.number.isRequired,
   height: React.PropTypes.number.isRequired,
-  children: React.PropTypes.array.isRequired,
+  children: React.PropTypes.element.isRequired,
 };
 
 export default GameScene;

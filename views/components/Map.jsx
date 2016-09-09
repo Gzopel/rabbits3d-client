@@ -7,7 +7,7 @@ const THREE = require('three');
 const Object3D = ReactTHREE.Object3D;
 const Mesh = ReactTHREE.Mesh;
 
-const Map = () => {
+const Map = ({ children }) => {
   const material = new THREE.MeshBasicMaterial({
     color: 0x00ff00,
     side: THREE.DoubleSide,
@@ -31,8 +31,13 @@ const Map = () => {
   return (
     <Object3D quaternion={quaternion0} position={position}>
       <Mesh position={position} geometry={geometry} material={material} />
+      { children }
     </Object3D>
   );
+};
+
+Map.propTypes = {
+  children: React.PropTypes.element.isRequired,
 };
 
 export default Map;

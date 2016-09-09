@@ -6,8 +6,9 @@ import Character from './Character';
 const Game = () => {
   return (
     <GameScene width={window.innerWidth} height={window.innerHeight}>
-      <Map />
-      <Character />
+      <Map>
+        <Character />
+      </Map>
     </GameScene>
   );
 };
