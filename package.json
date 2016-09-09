@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=test node app.js",
-    "build": "webpack --config webpack.config.test.js"
+    "build": "webpack --config webpack.config.test.js",
+    "dev": "npm run build && npm start"
   },
   "author": "jepunto@gmail.com",
   "license": "ISC",
@@ -32,6 +33,8 @@
     "eslint-plugin-jsx-a11y": "^2.2.1",
     "eslint-plugin-react": "^6.2.0",
     "redux-devtools": "^3.3.1",
+    "redux-devtools-dock-monitor": "^1.1.1",
+    "redux-devtools-log-monitor": "^1.0.11",
     "webpack": "1.13.2"
   }
 }
