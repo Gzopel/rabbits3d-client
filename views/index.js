@@ -2,28 +2,13 @@ if (module.hot) { module.hot.accept(); }
 
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router';
-import { Provider } from 'react-redux';
-import { createStore, compose } from 'redux';
-import Game from './containers/Game';
-import RootReducer from './reducers';
-import DevTools from './containers/DevTools';
+import { browserHistory } from 'react-router';
+import Root from './containers/Root';
+import configureStore from './store/configureStore';
 
-const store = createStore(
-  RootReducer,
-  compose(
-    DevTools.instrument()
-  )
-);
+const store = configureStore();
 
 render((
-  <Provider store={store}>
-    <div>
-      <Router history={browserHistory} >
-        <Route path="/" component={Game} />
-      </Router>
-      <DevTools />
-    </div>
-  </Provider>
+  <Root store={store} history={browserHistory} />
 ),
 document.getElementById('app'));
