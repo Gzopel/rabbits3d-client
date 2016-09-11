@@ -36,7 +36,7 @@ const CameraReducer = (state = InitialState, action) => {
     case ACTIONS.CAMERA.ROTATE:
       return {
         config: {
-          ...InitialState.config,
+          ...state.config,
           lookat: mapRotationVectorFromAction(state, action),
         },
       };
