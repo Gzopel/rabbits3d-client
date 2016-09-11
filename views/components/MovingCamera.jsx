@@ -1,5 +1,6 @@
 import React from 'react';
 import { cameraRotation } from '../actions/Camera';
+import * as BrowserActions from '../actions/Browser';
 
 const ReactTHREE = require('react-three');
 
@@ -7,13 +8,15 @@ const PerspectiveCamera = ReactTHREE.PerspectiveCamera;
 
 class MovingCamera extends React.Component {
   componentDidMount = () => {
-    // TODO: Move browser events to browser action/reducer
-    window.addEventListener('keypress', this.rotateCamera);
+    this.props.dispatch(
+      BrowserActions.addEventListener('MovingCamera', 'keypress', this.rotateCamera)
+    );
   };
 
   componentWillUnmount = () => {
-    // TODO: Move browser events to browser action/reducer
-    window.removeEventListener('keypress', this.rotateCamera);
+    this.props.dispatch(
+      BrowserActions.removeEventListener('MovingCamera', 'keypress', this.rotateCamera)
+    );
   };
 
   rotateCamera = (event) => {
@@ -28,6 +31,7 @@ class MovingCamera extends React.Component {
 }
 
 MovingCamera.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
   config: React.PropTypes.shape({
     fov: React.PropTypes.number.isRequired,
     aspect: React.PropTypes.number.isRequired,
@@ -36,7 +40,6 @@ MovingCamera.propTypes = {
     position: React.PropTypes.object.isRequired,
     lookat: React.PropTypes.object.isRequired,
   }).isRequired,
-  dispatch: React.PropTypes.func.isRequired,
 };
 
 export default MovingCamera;
