@@ -1,5 +1,5 @@
-import webpack from 'webpack';
-import base from './webpack.base';
+var webpack = require('webpack');
+var base = require('./webpack.base');
 
 base.host = 'localhost';
 base.port = 1234;
@@ -15,4 +15,4 @@ base.plugins = base.plugins.concat([
   new webpack.NoErrorsPlugin(),
 ]);
 
-export default base;
+module.exports = base;
