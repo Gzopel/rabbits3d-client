@@ -12,7 +12,6 @@ const Map = ({ children }) => {
     color: 0x00ff00,
     side: THREE.DoubleSide
   });
-
   const geometry = new THREE.PlaneGeometry(800, 800, 1, 1);
   geometry.rotateX(Math.PI/2)
   const quaternion0 = new THREE.Quaternion(0, 0, 0, 0);
