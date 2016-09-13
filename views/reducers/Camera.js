@@ -7,7 +7,7 @@ const InitialState = {
     fov: 75,
     near: 1,
     far: 800,
-    position: new Three.Vector3(400, 0, 400),
+    position: new Three.Vector3(400, 50, 0),
     lookat: new Three.Vector3(0, 0, 0),
   },
 };
@@ -26,7 +26,7 @@ const mapRotationVectorFromAction = (state, action) => {
       return new Three.Vector3(1 * speed, 0, 0).add(state.config.lookat);
     case ACTIONS.MOVE.RESET:
     default:
-      return new Three.Vector3(0, 0, 0);
+      return state.config.lookat;
   }
 };
 

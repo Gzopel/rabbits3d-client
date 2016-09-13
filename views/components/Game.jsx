@@ -1,7 +1,7 @@
 import React from 'react';
 import GameScene from './GameScene';
 import Map from './Map';
-import Character from './Character';
+import MovingCharacter from '../containers/MovingCharacter';
 import * as BrowserActions from '../actions/Browser';
 
 class Game extends React.Component {
@@ -29,7 +29,7 @@ class Game extends React.Component {
     return (
       <GameScene width={this.props.size.width} height={this.props.size.height}>
         <Map>
-          <Character />
+          <MovingCharacter />
         </Map>
       </GameScene>
     );

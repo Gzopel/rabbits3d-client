@@ -6,16 +6,16 @@ const ReactTHREE = require('react-three');
 
 const PerspectiveCamera = ReactTHREE.PerspectiveCamera;
 
-class MovingCamera extends React.Component {
+class Camera extends React.Component {
   componentDidMount = () => {
     this.props.dispatch(
-      BrowserActions.addEventListener('MovingCamera', 'keypress', this.rotateCamera)
+      BrowserActions.addEventListener('Camera', 'keypress', this.rotateCamera)
     );
   };
 
   componentWillUnmount = () => {
     this.props.dispatch(
-      BrowserActions.removeEventListener('MovingCamera', 'keypress', this.rotateCamera)
+      BrowserActions.removeEventListener('Camera', 'keypress', this.rotateCamera)
     );
   };
 
@@ -35,7 +35,7 @@ class MovingCamera extends React.Component {
   }
 }
 
-MovingCamera.propTypes = {
+Camera.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
   config: React.PropTypes.shape({
     fov: React.PropTypes.number.isRequired,
@@ -47,4 +47,4 @@ MovingCamera.propTypes = {
   aspect: React.PropTypes.number.isRequired,
 };
 
-export default MovingCamera;
+export default Camera;

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import MovingCamera from '../components/MovingCamera';
+import Camera from '../components/Camera';
 
 const mapStateToProps = (state) => {
   return {
@@ -15,9 +15,9 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 
-const Camera = connect(
+const MovingCamera = connect(
   mapStateToProps,
   mapDispatchToProps
-)(MovingCamera);
+)(Camera);
 
-export default Camera;
+export default MovingCamera;
