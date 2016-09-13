@@ -10,20 +10,10 @@ const Mesh = ReactTHREE.Mesh;
 const Map = ({ children }) => {
   const material = new THREE.MeshBasicMaterial({
     color: 0x00ff00,
-    side: THREE.DoubleSide,
+    side: THREE.DoubleSide
   });
 
- const geometry = new THREE.PlaneGeometry(800, 800, 1, 1);
-/*   const vFrom = new THREE.Vector3(800, 800, 0).normalize();
-  const vTo = new THREE.Vector3(800, 0, 800).normalize();
-  const quaternion = new THREE.Quaternion().setFromUnitVectors(vFrom, vTo);
-  geometry.applyMatrix(new THREE.Matrix4().makeRotationFromQuaternion(quaternion));
-
-  const vFrom2 = new THREE.Vector3(0, 800, 0).normalize();
-  const vTo2 = new THREE.Vector3(0, 0, 800).normalize();
-  const quaternion2 = new THREE.Quaternion().setFromUnitVectors(vFrom2, vTo2);
-  geometry.applyMatrix(new THREE.Matrix4().makeRotationFromQuaternion(quaternion2));
-*/
+  const geometry = new THREE.PlaneGeometry(800, 800, 1, 1);
   geometry.rotateX(Math.PI/2)
   const quaternion0 = new THREE.Quaternion(0, 0, 0, 0);
   const position = new THREE.Vector3(0, 0, 0);
@@ -38,7 +28,7 @@ const Map = ({ children }) => {
 };
 
 Map.propTypes = {
-  children: React.PropTypes.element.isRequired,
+  children: React.PropTypes.element.isRequired
 };
 
 export default Map;

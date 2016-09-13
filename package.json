@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "js-beautify": "node_modules/js-beautify/js/bin/js-beautify.js -r $(git diff --name-only | grep -e '\\.js$')",
     "start": "node_modules/.bin/babel-node ./server/app.js",
     "build": "webpack --progress --color -p --config webpack.prod.config.js",
     "lint": "eslint --ignore-path .gitignore . ; exit 0"
