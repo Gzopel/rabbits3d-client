@@ -1,33 +1,50 @@
-import React, { PropTypes } from 'react'
-var ReactTHREE = require('react-three')
-import { cameraRotation } from '../actions/Camera'
-var PerspectiveCamera = ReactTHREE.PerspectiveCamera;
+import React from 'react';
+import { cameraRotation } from '../actions/Camera';
+import * as BrowserActions from '../actions/Browser';
 
-let dispatcher;
-document.onkeypress = (oPEvt)=> { //shouldnt this be on the container? =/
-    if(!dispatcher)
-        return;
-    var oEvent = oPEvt || window.event, charCode = oEvent.charCode;
-    if (charCode == 105 || charCode == 106 || charCode == 107 || charCode == 108 || charCode == 13 )
-        dispatcher(cameraRotation(charCode))
-};
+const ReactTHREE = require('react-three');
 
+const PerspectiveCamera = ReactTHREE.PerspectiveCamera;
 
-const MovingCamera = (config,dispatch)=>{
-    dispatcher = dispatch;
-    return <PerspectiveCamera name="maincamera" {...config} />
+class MovingCamera extends React.Component {
+  componentDidMount = () => {
+    this.props.dispatch(
+      BrowserActions.addEventListener('MovingCamera', 'keypress', this.rotateCamera)
+    );
+  };
+
+  componentWillUnmount = () => {
+    this.props.dispatch(
+      BrowserActions.removeEventListener('MovingCamera', 'keypress', this.rotateCamera)
+    );
+  };
+
+  rotateCamera = (event) => {
+    this.props.dispatch(cameraRotation(event.charCode));
+  };
+
+  render() {
+    const cameraConfig = {
+      ...this.props.config,
+      aspect: this.props.aspect,
+    };
+
+    return (
+      <PerspectiveCamera name="maincamera" {...cameraConfig} />
+    );
+  }
 }
 
 MovingCamera.propTypes = {
-    config : PropTypes.shape({
-        fov:  PropTypes.number.isRequired,
-        aspect:  PropTypes.number.isRequired,
-        near:  PropTypes.number.isRequired,
-        far:  PropTypes.number.isRequired,
-        position:  PropTypes.object.isRequired,
-        lookat: PropTypes.object.isRequired
-    }).isRequired,
-    dispatch: PropTypes.func.isRequired
-}
+  dispatch: React.PropTypes.func.isRequired,
+  config: React.PropTypes.shape({
+    fov: React.PropTypes.number.isRequired,
+    near: React.PropTypes.number.isRequired,
+    far: React.PropTypes.number.isRequired,
+    position: React.PropTypes.object.isRequired,
+    lookat: React.PropTypes.object.isRequired,
+  }).isRequired,
+  aspect: React.PropTypes.number.isRequired,
+};
 
-export default MovingCamera
+export default MovingCamera;

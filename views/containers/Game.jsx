@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
-import MovingCamera from '../components/MovingCamera';
+import GameComponent from '../components/Game';
 
 const mapStateToProps = (state) => {
   return {
-    config: state.Camera.config,
-    aspect: state.Browser.size.width / state.Browser.size.height,
+    size: state.Browser.size,
   };
 };
 
@@ -15,9 +14,9 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 
-const Camera = connect(
+const Game = connect(
   mapStateToProps,
   mapDispatchToProps
-)(MovingCamera);
+)(GameComponent);
 
-export default Camera;
+export default Game;
