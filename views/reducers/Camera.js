@@ -18,13 +18,13 @@ const mapRotationVectorFromAction = (state, action) => {
   const speed = action.speed || 1;
   switch (action.rotation) {
     case ACTIONS.MOVE.UP:
-      return state.config.lookat.add(new Three.Vector3(0, 1 * speed, 0));
+      return new Three.Vector3(0, 0, 1 * speed).add(state.config.lookat);
     case ACTIONS.MOVE.DOWN:
-      return state.config.lookat.add(new Three.Vector3(0, -1  * speed, 0));
+      return new Three.Vector3(0, -1  * speed, 0).add(state.config.lookat);
     case ACTIONS.MOVE.LEFT:
-      return state.config.lookat.add(new Three.Vector3(-1  * speed, 0, 0));
+      return new Three.Vector3(-1  * speed, 0, 0).add(state.config.lookat);
     case ACTIONS.MOVE.RIGHT:
-      return state.config.lookat.add(new Three.Vector3(1 * speed, 0, 0));
+      return new Three.Vector3(1 * speed, 0, 0).add(state.config.lookat);
     case ACTIONS.MOVE.RESET:
     default:
       return new Three.Vector3(0, 0, 0);
