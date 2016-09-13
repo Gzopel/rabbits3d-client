@@ -4,6 +4,7 @@ import MovingCamera from '../components/MovingCamera';
 const mapStateToProps = (state) => {
   return {
     config: state.Camera.config,
+    aspect: state.Browser.size.width / state.Browser.size.height,
   };
 };
 

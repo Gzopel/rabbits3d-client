@@ -20,12 +20,17 @@ class MovingCamera extends React.Component {
   };
 
   rotateCamera = (event) => {
-    this.props.dispatch(cameraRotation(event.keyCode));
+    this.props.dispatch(cameraRotation(event.charCode));
   };
 
   render() {
+    const cameraConfig = {
+      ...this.props.config,
+      aspect: this.props.aspect,
+    };
+
     return (
-      <PerspectiveCamera name="maincamera" {...this.props.config} />
+      <PerspectiveCamera name="maincamera" {...cameraConfig} />
     );
   }
 }
@@ -34,12 +39,12 @@ MovingCamera.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
   config: React.PropTypes.shape({
     fov: React.PropTypes.number.isRequired,
-    aspect: React.PropTypes.number.isRequired,
     near: React.PropTypes.number.isRequired,
     far: React.PropTypes.number.isRequired,
     position: React.PropTypes.object.isRequired,
     lookat: React.PropTypes.object.isRequired,
   }).isRequired,
+  aspect: React.PropTypes.number.isRequired,
 };
 
 export default MovingCamera;
