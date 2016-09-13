@@ -3,6 +3,7 @@ import GameScene from './GameScene';
 import Map from './Map';
 import MovingCharacter from '../containers/MovingCharacter';
 import * as BrowserActions from '../actions/Browser';
+import {step,stop} from '../animationFrame';
 
 class Game extends React.Component {
   componentWillMount() {
@@ -13,6 +14,11 @@ class Game extends React.Component {
     this.props.dispatch(
       BrowserActions.addEventListener('Game', 'resize', this.resizeGameScene)
     );
+    step();
+  }
+
+  componentWillUnmount(){
+    stop();
   }
 
   resizeGameScene = () => {

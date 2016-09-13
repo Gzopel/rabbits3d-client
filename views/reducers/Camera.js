@@ -7,7 +7,7 @@ const InitialState = {
     fov: 75,
     near: 1,
     far: 800,
-    position: new Three.Vector3(400, 50, 0),
+    position: new Three.Vector3(0, 50, -400),
     lookat: new Three.Vector3(0, 0, 0),
   },
 };

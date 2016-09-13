@@ -19,7 +19,7 @@ const Root = ({ store, history }) => {
 
 Root.propTypes = {
   store: React.PropTypes.object.isRequired,
-  history: React.PropTypes.object.isRequired,
+  history: React.PropTypes.object.isRequired
 };
 
 export default Root;
