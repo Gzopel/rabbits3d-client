@@ -1,24 +1,22 @@
 import React from 'react'
-var ReactTHREE = require('react-three')
+const ReactTHREE = require('react-three')
 const THREE =require('three')
 const Object3D = ReactTHREE.Object3D;
 const Mesh = ReactTHREE.Mesh;
 
-const Exit = React.createClass({
-    getInitialState() {
-        return {};
-    },
-    render() {
-        var geometry = new THREE.CircleGeometry( 5, 32 );
-        var material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
-        var quaternion = new THREE.Quaternion(0,0,0,0)
-        let position = new THREE.Vector3(this.props.x,1,this.props.z);
-        console.log("rendering exit at ",this.props);
-        return (<Object3D quaternion={quaternion} position={position}>
-            <Mesh position={position} geometry={geometry} material={material} />
-        </Object3D>)
+const Exit = ({x,z})=>{
+    const geometry = new THREE.CylinderGeometry( 5, 5, 20, 32 );// new THREE.CircleGeometry( 5, 32 );
+    const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+    const quaternion = new THREE.Quaternion(0,0,0,0)
+    const position = new THREE.Vector3(x,1,z);
+    return (<Object3D quaternion={quaternion} position={position}>
+        <Mesh position={position} geometry={geometry} material={material} />
+    </Object3D>)
+}
 
-    }
-})
+Exit.propTypes = {
+  x: React.PropTypes.number.isRequired,
+  z: React.PropTypes.number.isRequired
+};
 
 export default Exit

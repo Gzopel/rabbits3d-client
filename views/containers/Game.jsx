@@ -5,6 +5,10 @@ import Map from '../components/Map';
 import Character from '../containers/Character';
 import * as BrowserActions from '../actions/Browser';
 import {start,stop} from '../animationFrame';
+import Exit from '../components/Exit'
+
+const ReactTHREE = require('react-three');
+const Object3D = ReactTHREE.Object3D;
 
 import configureStore from '../store/configureStore';
 import { Provider } from 'react-redux';
@@ -22,9 +26,11 @@ class GameComponent extends React.Component {
     this.props.dispatch(
       BrowserActions.addEventListener('Game', 'resize', this.resizeGameScene)
     );
-    start(<Provider store={store}>
-        <Game />
-    </Provider>);
+    setTimeout(()=>{
+      start(<Provider store={store}>
+            <Game />
+          </Provider>);
+    },1000)
   }
 
   componentWillUnmount(){
@@ -45,7 +51,13 @@ class GameComponent extends React.Component {
     return (
       <GameScene width={this.props.size.width} height={this.props.size.height}>
         <Map>
+        <Object3D>
           <Character />
+          <Exit x={395} z={400}/>
+          <Exit x={400} z={395}/>
+          <Exit x={-395} z={-400}/>
+          <Exit x={-400} z={-395}/>
+          </Object3D>
         </Map>
       </GameScene>
     );

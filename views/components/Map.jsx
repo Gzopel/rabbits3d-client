@@ -1,7 +1,6 @@
 import React from 'react';
-
+import Exit from './Exit'
 const ReactTHREE = require('react-three');
-
 const THREE = require('three');
 
 const Object3D = ReactTHREE.Object3D;
