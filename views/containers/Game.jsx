@@ -40,10 +40,10 @@ class GameComponent extends React.Component {
         <Map>
         <Object3D>
           <Character />
-          <Exit x={239} z={239}/>
-          <Exit x={-239} z={239}/>
-          <Exit x={239} z={-239}/>
-          <Exit x={-239} z={-239}/>
+          <Exit x={780} z={0}/>
+          <Exit x={-780} z={0}/>
+          <Exit x={0} z={780}/>
+          <Exit x={0} z={-780}/>
           </Object3D>
         </Map>
       </GameScene>

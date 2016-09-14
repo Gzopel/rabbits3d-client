@@ -8,7 +8,7 @@ const InitialState = {
   cameraConfig: {
     fov: 75,
     near: 1,
-    far: 800,
+    far: 1600,
     position: new Three.Vector3(0, 50, -200),
     lookat: new Three.Vector3(0, 0, 0),
   },

@@ -25,9 +25,8 @@ class MovingCharacter extends React.Component {
       color: 0xff0000,
     });
     const geometry = new THREE.SphereGeometry(5, 32, 32);
-    const quaternion = new THREE.Quaternion(0, 0, 0, 0);
     return (
-      <Object3D quaternion={quaternion} position={this.props.position}>
+      <Object3D>
         <Mesh position={this.props.position} geometry={geometry} material={material} />
       </Object3D>
     );
