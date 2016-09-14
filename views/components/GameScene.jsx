@@ -1,5 +1,5 @@
 import React from 'react';
-import MovingCamera from '../containers/MovingCamera';
+import Camera from '../containers/Camera';
 
 const ReactTHREE = require('react-three');
 
@@ -10,7 +10,7 @@ const GameScene = ({ width, height, children }) => {
   return (
     <Renderer width={width} height={height}>
       <Scene width={width} height={height} camera="maincamera">
-        <MovingCamera />
+        <Camera />
         {children}
       </Scene>
     </Renderer>

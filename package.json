@@ -12,7 +12,10 @@
   "author": "jepunto@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "babel-polyfill": "6.13.0",
+    "event-emitter": "0.3.4",
     "express": "4.14.0",
+    "keydrown": "1.2.2",
     "lodash": "4.15.0",
     "react": "15.3.1",
     "react-dom": "15.3.1",
@@ -21,8 +24,7 @@
     "react-three": "0.9.4",
     "redux": "3.6.0",
     "redux-thunk": "2.1.0",
-    "three": "0.74.0",
-    "babel-polyfill": "6.13.0"
+    "three": "0.74.0"
   },
   "devDependencies": {
     "babel-cli": "6.14.0",

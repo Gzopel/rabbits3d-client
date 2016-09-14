@@ -1,26 +1,24 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { cameraRotation } from '../actions/Camera';
 import * as BrowserActions from '../actions/Browser';
+import keyEmitter from '../KeyEventEmitter';
 
 const ReactTHREE = require('react-three');
-
 const PerspectiveCamera = ReactTHREE.PerspectiveCamera;
+const keys = ['J','K','L','I','ENTER'];
 
-class Camera extends React.Component {
+class MovingCamera extends React.Component {
   componentDidMount = () => {
-    this.props.dispatch(
-      BrowserActions.addEventListener('Camera', 'keypress', this.rotateCamera)
-    );
+    keyEmitter.on(keys, this.rotateCamera)
   };
 
   componentWillUnmount = () => {
-    this.props.dispatch(
-      BrowserActions.removeEventListener('Camera', 'keypress', this.rotateCamera)
-    );
+    keyEmitter.off(keys, this.rotateCamera)
   };
 
   rotateCamera = (event) => {
-    this.props.dispatch(cameraRotation(event.charCode));
+    this.props.dispatch(cameraRotation(event));
   };
 
   render() {
@@ -35,7 +33,7 @@ class Camera extends React.Component {
   }
 }
 
-Camera.propTypes = {
+MovingCamera.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
   config: React.PropTypes.shape({
     fov: React.PropTypes.number.isRequired,
@@ -46,5 +44,24 @@ Camera.propTypes = {
   }).isRequired,
   aspect: React.PropTypes.number.isRequired,
 };
+
+const mapStateToProps = (state) => {
+  return {
+    config: state.Camera.config,
+    aspect: state.Browser.size.width / state.Browser.size.height,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch: dispatch,
+  };
+};
+
+
+const Camera = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MovingCamera);
 
 export default Camera;

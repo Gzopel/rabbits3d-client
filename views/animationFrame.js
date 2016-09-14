@@ -3,23 +3,24 @@ import configureStore from './store/configureStore';
 const ReactTHREE = require('react-three');
 import { Provider } from 'react-redux';
 import Game from './containers/Game';
+import keydrown from 'keydrown';
 
 const store = configureStore();
 const renderelement = document.getElementById('app');
 
-let prevT = 0;
 let _stop = false;
-export const stop = () => {_stop=true};
-export const step = (t) => {
-    if(_stop) return;
+let _element;
 
+const step = (timestamp) => {
     let start = new Date().getTime();
-    console.log("TIME DIFF",prevT-t);
-    prevT = t;
-    ReactTHREE.render(
-        <Provider store={store}>
-            <Game />
-        </Provider>, renderelement);
+
+    ReactTHREE.render(_element, renderelement);
+
+    if(_stop) {
+      keydrown.stop();
+      return;
+    }
+    keydrown.tick();
 
     let end = new Date().getTime();
     let diff = end-start;
@@ -31,3 +32,13 @@ export const step = (t) => {
     } else requestAnimationFrame(step);
 };
 
+export const start = (element) => {
+  _element=element;
+  _stop=false;
+  step();
+};
+
+export const stop = (element) => {
+  _element=element
+  _stop=true
+};

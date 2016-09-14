@@ -1,28 +1,27 @@
+import { connect } from 'react-redux';
 import React from 'react';
 import { characterMove } from '../actions/Character';
 import * as BrowserActions from '../actions/Browser';
+import keyEmitter from '../KeyEventEmitter';
 
 const ReactTHREE = require('react-three');
 const THREE = require('three');
 
 const Object3D = ReactTHREE.Object3D;
 const Mesh = ReactTHREE.Mesh;
+const keys = ['W','A','S','D'];
 
-class Character extends React.Component {
+class MovingCharacter extends React.Component {
   componentDidMount = () => {
-    this.props.dispatch(
-      BrowserActions.addEventListener('Character', 'keypress', this.characterMove)
-    );
+      keyEmitter.on(keys, this.characterMove)
   };
 
   componentWillUnmount = () => {
-    this.props.dispatch(
-      BrowserActions.removeEventListener('Character', 'keypress', this.characterMove)
-    );
+      keyEmitter.off(keys, this.characterMove)
   };
 
   characterMove = (event) => {
-    this.props.dispatch(characterMove(event.charCode));
+    this.props.dispatch(characterMove(event));
   };
 
   render() {
@@ -39,8 +38,26 @@ class Character extends React.Component {
   }
 }
 
-Character.propTypes = {
+MovingCharacter.propTypes = {
   position: React.PropTypes.object.isRequired
 };
+
+const mapStateToProps = (state) => {
+  return {
+    position: state.Character.position,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch: dispatch,
+  };
+};
+
+
+const Character = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MovingCharacter);
 
 export default Character;
