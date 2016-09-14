@@ -44,7 +44,7 @@ MovingCharacter.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    position: state.Character.position,
+    position: state.CharacterCamera.characterPosition,
   };
 };
 

@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux';
-import Camera from './Camera';
 import Browser from './Browser';
-import Character from './Character';
+import CharacterCamera from './CharacterCamera';
 
 const rootReducer = combineReducers({
-  Camera,
-  Character,
+  CharacterCamera,
   Browser,
 });
 

@@ -1,9 +1,9 @@
 import ACTIONS from '../actions';
-import {nextPosition} from './Movement.js' 
+import {nextPosition} from './Movement.js';
 const Three = require('three');
 
 const InitialState = {
-  position: new Three.Vector3(0, 0, 0)
+  characterPosition: new Three.Vector3(0, 0, 0)
 };
 
 
@@ -11,7 +11,7 @@ const CharacterReducer = (state = InitialState, action) => {
   switch (action.type) {
     case ACTIONS.CHARACTER.WALK:
       return {
-        position:  nextPosition(state.position, action),
+        characterPosition:  nextPosition(state.characterPosition, action),
       };
     default:
       return state;

@@ -1,9 +1,9 @@
 import ACTIONS from '../actions';
-import {nextPosition} from './Movement.js'
+import {nextPosition} from './Movement.js';
 const Three = require('three');
 
 const InitialState = {
-  config: {
+  cameraConfig: {
     fov: 75,
     near: 1,
     far: 800,
@@ -15,26 +15,18 @@ const InitialState = {
 const CameraReducer = (state = InitialState, action) => {
   switch (action.type) {
     case ACTIONS.CAMERA.ROTATE:
-      if (action.direction == ACTIONS.RESET){
-        return {
-          config: {
-            ...state.config,
-          //  lookat: get the character position some how
-          }
-        }
-      }
       return {
-        config: {
-          ...state.config,
-          lookat: nextPosition(state.config.lookat, action)
+        cameraConfig: {
+          ...state.cameraConfig,
+          lookat: nextPosition(state.cameraConfig.lookat, action)
         }
       };
     case ACTIONS.CHARACTER.WALK:
         return {
-          config: {
-            ...state.config,
-            lookat: nextPosition(state.config.lookat, action),
-            position: nextPosition(state.config.position, action),
+          cameraConfig: {
+            ...state.cameraConfig,
+            lookat: nextPosition(state.cameraConfig.lookat, action),
+            position: nextPosition(state.cameraConfig.position, action),
           }
         }
     default:

@@ -47,7 +47,7 @@ MovingCamera.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    config: state.Camera.config,
+    config: state.CharacterCamera.cameraConfig,
     aspect: state.Browser.size.width / state.Browser.size.height,
   };
 };
