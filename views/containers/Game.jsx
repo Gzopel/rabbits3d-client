@@ -19,29 +19,16 @@ const store = configureStore();
 
 class GameComponent extends React.Component {
   componentWillMount() {
-    this.resizeGameScene();
+      this.props.onWillMount();
   }
 
   componentDidMount() {
-    this.props.dispatch(
-      BrowserActions.addEventListener('Game', 'resize', this.resizeGameScene)
-    );
-    setTimeout(()=>{
-      start(<Provider store={store}>
-            <Game />
-          </Provider>);
-    },1000)
+    this.props.onDidMount();
   }
 
   componentWillUnmount(){
-    stop(<Root store={store} history={browserHistory}/>);
+    this.props.onWillUnmount();
   }
-
-  resizeGameScene = () => {
-    this.props.dispatch(
-      BrowserActions.updateViewportSize()
-    );
-  };
 
   render() {
     if (!this.props.size.width || !this.props.size.height) {
@@ -53,10 +40,10 @@ class GameComponent extends React.Component {
         <Map>
         <Object3D>
           <Character />
-          <Exit x={395} z={400}/>
-          <Exit x={400} z={395}/>
-          <Exit x={-395} z={-400}/>
-          <Exit x={-400} z={-395}/>
+          <Exit x={239} z={239}/>
+          <Exit x={-239} z={239}/>
+          <Exit x={239} z={-239}/>
+          <Exit x={-239} z={-239}/>
           </Object3D>
         </Map>
       </GameScene>
@@ -65,7 +52,9 @@ class GameComponent extends React.Component {
 }
 
 GameComponent.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
+  onDidMount: React.PropTypes.func.isRequired,
+  onWillMount: React.PropTypes.func.isRequired,
+  onWillUnmount:React.PropTypes.func.isRequired,
   size: React.PropTypes.shape({
     width: React.PropTypes.number,
     height: React.PropTypes.number,
@@ -79,8 +68,19 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
+  const resize = ()=>{dispatch(BrowserActions.updateViewportSize())}
+  const onDidMount = ()=>{
+    dispatch(BrowserActions.addEventListener('Game', 'resize', resize));
+    start(<Provider store={store}><Game /></Provider>);
+  }
+  const onWillUnmount = ()=>{
+    dispatch(BrowserActions.addEventListener('Game', 'resize', resize));
+    stop(<Root store={store} history={browserHistory}/>);
+  }
   return {
-    dispatch: dispatch,
+    onDidMount: onDidMount,
+    onWillMount: resize,
+    onWillUnmount:onWillUnmount
   };
 };
 

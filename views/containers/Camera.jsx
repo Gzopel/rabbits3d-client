@@ -10,15 +10,11 @@ const keys = ['J','K','L','I','ENTER'];
 
 class MovingCamera extends React.Component {
   componentDidMount = () => {
-    keyEmitter.on(keys, this.rotateCamera)
+      this.props.onMount()
   };
 
   componentWillUnmount = () => {
-    keyEmitter.off(keys, this.rotateCamera)
-  };
-
-  rotateCamera = (event) => {
-    this.props.dispatch(cameraRotation(event));
+      this.props.onUnmount()
   };
 
   render() {
@@ -34,7 +30,8 @@ class MovingCamera extends React.Component {
 }
 
 MovingCamera.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
+  onUnmount: React.PropTypes.func.isRequired,
+  onMount: React.PropTypes.func.isRequired,
   config: React.PropTypes.shape({
     fov: React.PropTypes.number.isRequired,
     near: React.PropTypes.number.isRequired,
@@ -53,8 +50,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
+  const onKeyPressed = (event)=>{dispatch(cameraRotation(event))};
   return {
-    dispatch: dispatch,
+    onMount: () => { keyEmitter.on(keys,onKeyPressed)},
+    onUnmount: () => { keyEmitter.off(keys,onKeyPressed)}
   };
 };
 
