@@ -20,7 +20,7 @@ export const characterMove = (key) => {
   return {
     type: ACTIONS.CHARACTER.WALK,
     direction: mapCharToDirection(key),
-    speed: 3,
+    speed: 10,
   };
 };
 

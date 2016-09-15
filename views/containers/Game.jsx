@@ -4,17 +4,9 @@ import GameScene from '../components/GameScene';
 import Map from '../components/Map';
 import Character from '../containers/Character';
 import * as BrowserActions from '../actions/Browser';
-import {start,stop} from '../animationFrame';
 import Exit from '../components/Exit'
-
 const ReactTHREE = require('react-three');
 const Object3D = ReactTHREE.Object3D;
-
-import configureStore from '../store/configureStore';
-import { Provider } from 'react-redux';
-import { browserHistory } from 'react-router';
-import Root from '../containers/Root';
-const store = configureStore();
 
 
 class GameComponent extends React.Component {
@@ -71,11 +63,9 @@ const mapDispatchToProps = (dispatch) => {
   const resize = ()=>{dispatch(BrowserActions.updateViewportSize())}
   const onDidMount = ()=>{
     dispatch(BrowserActions.addEventListener('Game', 'resize', resize));
-    start(<Provider store={store}><Game /></Provider>);
   }
   const onWillUnmount = ()=>{
     dispatch(BrowserActions.addEventListener('Game', 'resize', resize));
-    stop(<Root store={store} history={browserHistory}/>);
   }
   return {
     onDidMount: onDidMount,
