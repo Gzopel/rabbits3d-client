@@ -1,6 +1,5 @@
 import ACTIONS from '../actions';
 
-// TODO: Make state immutable
 const InitialState = {
   size: {},
   events: [],

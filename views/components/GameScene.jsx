@@ -2,7 +2,6 @@ import React from 'react';
 import Camera from '../containers/Camera';
 
 const ReactTHREE = require('react-three');
-
 const Renderer = ReactTHREE.Renderer;
 const Scene = ReactTHREE.Scene;
 

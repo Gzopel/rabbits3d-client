@@ -2,7 +2,7 @@ import ACTIONS from '../actions';
 import {nextPosition} from './Movement.js';
 const Three = require('three');
 
-const InitialState = {
+export const CameraInitialState = {
   cameraConfig: {
     fov: 75,
     near: 1,
@@ -12,7 +12,7 @@ const InitialState = {
   },
 };
 
-const CameraReducer = (state = InitialState, action) => {
+export const CameraReducer = (state = CameraInitialState, action) => {
   switch (action.type) {
     case ACTIONS.CAMERA.ROTATE:
       return {
@@ -33,5 +33,3 @@ const CameraReducer = (state = InitialState, action) => {
       return state;
   }
 };
-
-export default CameraReducer;

@@ -2,12 +2,11 @@ import ACTIONS from '../actions';
 import {nextPosition} from './Movement.js';
 const Three = require('three');
 
-const InitialState = {
+export const CharacterInitialState = {
   characterPosition: new Three.Vector3(0, 0, 0)
 };
 
-
-const CharacterReducer = (state = InitialState, action) => {
+export const CharacterReducer = (state = CharacterInitialState, action) => {
   switch (action.type) {
     case ACTIONS.CHARACTER.WALK:
       return {
@@ -17,5 +16,3 @@ const CharacterReducer = (state = InitialState, action) => {
       return state;
   }
 };
-
-export default CharacterReducer;

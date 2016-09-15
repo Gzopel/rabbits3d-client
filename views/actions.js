@@ -2,9 +2,9 @@ const ACTIONS = {
   RESET: 'RESET',
   IDLE: 'IDLE',
   MOVE: {
-    UP: 'UP',
+    FOWARD: 'FOWARD',
     LEFT: 'LEFT',
-    DOWN: 'DOWN',
+    BACK: 'BACK',
     RIGHT: 'RIGHT',
   },
   CAMERA: {

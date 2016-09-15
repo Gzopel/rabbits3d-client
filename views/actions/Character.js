@@ -4,11 +4,11 @@ import KEYS from '../keys';
 const mapCharToDirection = (key) => {
   switch (key) {
     case KEYS.W:
-      return ACTIONS.MOVE.UP;
+      return ACTIONS.MOVE.FOWARD;
     case KEYS.A:
       return ACTIONS.MOVE.LEFT;
     case KEYS.S:
-      return ACTIONS.MOVE.DOWN;
+      return ACTIONS.MOVE.BACK;
     case KEYS.D:
       return ACTIONS.MOVE.RIGHT;
     default:

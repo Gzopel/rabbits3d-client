@@ -1,14 +1,13 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import { characterMove } from '../actions/Character';
-import * as BrowserActions from '../actions/Browser';
 import keyEmitter from '../KeyEventEmitter';
 
 const ReactTHREE = require('react-three');
 const THREE = require('three');
-
 const Object3D = ReactTHREE.Object3D;
 const Mesh = ReactTHREE.Mesh;
+
 const keys = ['W','A','S','D'];
 
 class MovingCharacter extends React.Component {

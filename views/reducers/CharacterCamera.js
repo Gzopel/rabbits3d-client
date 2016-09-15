@@ -1,18 +1,12 @@
 import ACTIONS from '../actions';
 import {nextPosition} from './Movement.js';
-import Character from './Character';
-import Camera from './Camera';
+import {CharacterReducer ,CharacterInitialState} from './Character';
+import {CameraReducer ,CameraInitialState} from './Camera';
 const Three = require('three');
 
 const InitialState = {
-  cameraConfig: {
-    fov: 75,
-    near: 1,
-    far: 1600,
-    position: new Three.Vector3(0, 50, -200),
-    lookat: new Three.Vector3(0, 0, 0),
-  },
-  characterPosition: new Three.Vector3(0, 0, 0)
+  ...CameraInitialState,
+  ...CharacterInitialState
 };
 
 
@@ -20,8 +14,8 @@ const CharacterCameraReducer = (state = InitialState, action) => {
   switch (action.type) {
     case ACTIONS.CHARACTER.WALK:
       return {
-        ...Character(state,action),
-        ...Camera(state,action)
+        ...CharacterReducer(state,action),
+        ...CameraReducer(state,action)
       };
     case ACTIONS.CAMERA.ROTATE:
       if (action.direction == ACTIONS.RESET){
@@ -34,7 +28,7 @@ const CharacterCameraReducer = (state = InitialState, action) => {
         }
       }
       return {
-        ...Camera(state,action),
+        ...CameraReducer(state,action),
         characterPosition:state.characterPosition
       };
     default:

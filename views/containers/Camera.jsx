@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { cameraRotation } from '../actions/Camera';
-import * as BrowserActions from '../actions/Browser';
 import keyEmitter from '../KeyEventEmitter';
-
 const ReactTHREE = require('react-three');
 const PerspectiveCamera = ReactTHREE.PerspectiveCamera;
+
 const keys = ['J','K','L','I','ENTER'];
 
 class MovingCamera extends React.Component {
