@@ -25,11 +25,7 @@ class MovingCharacter extends React.Component {
       color: 0xff0000,
     });
     const geometry = new THREE.SphereGeometry(5, 32, 32);
-    return (
-      <Object3D>
-        <Mesh position={this.props.position} geometry={geometry} material={material} />
-      </Object3D>
-    );
+    return (<Mesh position={this.props.position} geometry={geometry} material={material} />);
   }
 }
 

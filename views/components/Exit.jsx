@@ -9,9 +9,7 @@ const Exit = ({x,z})=>{
     geometry.rotateX(Math.PI/2)
     const material = new THREE.MeshBasicMaterial( { color: 0x0000ff, side: THREE.DoubleSide } );
     const position = new THREE.Vector3(x,1,z);
-    return (<Object3D>
-        <Mesh position={position} geometry={geometry} material={material} />
-    </Object3D>)
+    return (<Mesh position={position} geometry={geometry} material={material} />)
 }
 
 Exit.propTypes = {

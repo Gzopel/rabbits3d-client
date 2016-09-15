@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route } from 'react-router';
 import { Provider } from 'react-redux';
-import Game from '../containers/Game';
+import GameLoader from '../containers/GameLoader';
 import DevTools from '../containers/DevTools';
 
 const Root = ({ store, history }) => {
@@ -9,7 +9,7 @@ const Root = ({ store, history }) => {
     <Provider store={store}>
       <div>
         <Router history={history} >
-          <Route path="/" component={Game} />
+          <Route path="/" component={GameLoader} />
         </Router>
         <DevTools />
       </div>
