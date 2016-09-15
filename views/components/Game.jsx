@@ -1,6 +1,7 @@
 import React from 'react';
 import GameScene from '../components/GameScene';
 import Map from '../components/Map';
+import Tree from '../components/Tree';
 import Character from '../containers/Character';
 import Exit from '../components/Exit'
 import keydrown from 'keydrown';
@@ -33,6 +34,15 @@ class GameComponent extends React.Component {
           <Exit x={-780} z={0}/>
           <Exit x={0} z={780}/>
           <Exit x={0} z={-780}/>
+          <Tree x={300} z={300}/>
+          <Tree x={780} z={200}/>
+          <Tree x={200} z={780}/>
+          <Tree x={780} z={780}/>
+          <Tree x={200} z={200}/>
+          <Tree x={378} z={200}/>
+          <Tree x={200} z={378}/>
+          <Tree x={378} z={378}/>
+
           </Object3D>
         </Map>
       </GameScene>
