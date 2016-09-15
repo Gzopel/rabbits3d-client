@@ -1,7 +1,6 @@
-import React from 'react'
-const ReactTHREE = require('react-three')
-const THREE =require('three')
-const Object3D = ReactTHREE.Object3D;
+import React from 'react';
+const ReactTHREE = require('react-three');
+const THREE =require('three');
 const Mesh = ReactTHREE.Mesh;
 
 const Exit = ({x,z})=>{

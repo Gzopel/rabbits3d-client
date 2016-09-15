@@ -24,8 +24,19 @@ class MovingCharacter extends React.Component {
     const material = new THREE.MeshBasicMaterial({
       color: 0xff0000,
     });
-    const geometry = new THREE.SphereGeometry(5, 32, 32);
-    return (<Mesh position={this.props.position} geometry={geometry} material={material} />);
+    const headGeometry = new THREE.SphereGeometry(5, 32, 32);
+    const bodyGeometry = new THREE.CylinderGeometry( 6, 6, 10, 32 );
+    const legGeometry = new THREE.CylinderGeometry( 3, 3, 10, 32 );
+    const headPosition = new THREE.Vector3(0,25,0).add(this.props.position);
+    const bodyPosition = new THREE.Vector3(0,15,0).add(this.props.position);
+    const legPosition = new THREE.Vector3(0,5,0).add(this.props.position);
+    return (
+      <Object3D>
+        <Mesh position={headPosition} geometry={headGeometry} material={material} />
+        <Mesh position={bodyPosition} geometry={bodyGeometry} material={material} />
+        <Mesh position={legPosition} geometry={legGeometry} material={material} />
+      </Object3D>
+    );
   }
 }
 
