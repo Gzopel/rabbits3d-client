@@ -1,7 +1,6 @@
 FROM node:6-slim
 
 RUN apt-get update && \
-  apt-get install -y sudo && \
   apt-get install -y git
 
 ARG NODE_ENV
@@ -22,7 +21,7 @@ ENV PATH /rabbits3d-client/node_modules/.bin:$PATH
 
 RUN npm i
 #This should be necessary with current package.json
-RUN npm i -g webpack
+RUN npm i -g webpack babel-cli babel-plugin-transform-runtime
 RUN npm run build
 
 CMD npm start
