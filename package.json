@@ -6,8 +6,8 @@
   "scripts": {
     "js-beautify": "node_modules/.bin/js-beautify -r $(git diff --name-only | grep -e '\\.js$')",
     "start": "node_modules/.bin/babel-node ./server/app.js",
-    "build": "webpack --progress --color -p --config webpack.prod.config.js",
-    "lint": "eslint --ignore-path .gitignore . ; exit 0"
+    "build": "node_modules/.bin/webpack --progress --color -p --config webpack.prod.config.js",
+    "lint": "node_modules/.bin/eslint --ignore-path .gitignore . ; exit 0"
   },
   "author": "jepunto@gmail.com",
   "license": "ISC",
@@ -24,7 +24,8 @@
     "react-three": "0.9.4",
     "redux": "3.6.0",
     "redux-thunk": "2.1.0",
-    "three": "0.74.0"
+    "three": "0.74.0",
+    "webpack": "1.13.2"
   },
   "devDependencies": {
     "babel-cli": "6.14.0",
@@ -47,7 +48,6 @@
     "redux-devtools": "3.3.1",
     "redux-devtools-dock-monitor": "1.1.1",
     "redux-devtools-log-monitor": "1.0.11",
-    "webpack": "1.13.2",
     "webpack-dev-middleware": "1.6.1",
     "webpack-hot-middleware": "2.12.2"
   }
