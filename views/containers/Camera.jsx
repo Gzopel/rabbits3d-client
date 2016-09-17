@@ -2,18 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { cameraRotation } from '../actions/Camera';
 import keyEmitter from '../KeyEventEmitter';
-const ReactTHREE = require('react-three');
-const PerspectiveCamera = ReactTHREE.PerspectiveCamera;
+import KEYS from '../keys';
 
-const keys = ['J','K','L','I','ENTER'];
+const ReactTHREE = require('react-three');
+
+const PerspectiveCamera = ReactTHREE.PerspectiveCamera;
+const keys = [KEYS.J, KEYS.K, KEYS.L, KEYS.I, KEYS.ENTER];
 
 class MovingCamera extends React.Component {
   componentDidMount = () => {
-      this.props.onMount()
+    this.props.onMount();
   };
 
   componentWillUnmount = () => {
-      this.props.onUnmount()
+    this.props.onUnmount();
   };
 
   render() {
@@ -49,10 +51,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  const onKeyPressed = (event)=>{dispatch(cameraRotation(event))};
+  const onKeyPressed = (event) => { dispatch(cameraRotation(event)); };
   return {
-    onMount: () => { keyEmitter.on(keys,onKeyPressed)},
-    onUnmount: () => { keyEmitter.off(keys,onKeyPressed)}
+    onMount: () => { keyEmitter.on(keys, onKeyPressed); },
+    onUnmount: () => { keyEmitter.off(keys, onKeyPressed); },
   };
 };
 

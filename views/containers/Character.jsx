@@ -2,21 +2,23 @@ import { connect } from 'react-redux';
 import React from 'react';
 import { characterMove } from '../actions/Character';
 import keyEmitter from '../KeyEventEmitter';
+import KEYS from '../keys';
 
 const ReactTHREE = require('react-three');
 const THREE = require('three');
+
 const Object3D = ReactTHREE.Object3D;
 const Mesh = ReactTHREE.Mesh;
 
-const keys = ['W','A','S','D'];
+const keys = [KEYS.W, KEYS.A, KEYS.S, KEYS.D];
 
 class MovingCharacter extends React.Component {
   componentDidMount = () => {
-      this.props.onMount()
+      this.props.onMount();
   };
 
   componentWillUnmount = () => {
-      this.props.onUnmount()
+      this.props.onUnmount();
   };
 
   render() {
@@ -24,11 +26,11 @@ class MovingCharacter extends React.Component {
       color: 0xff0000,
     });
     const headGeometry = new THREE.SphereGeometry(5, 32, 32);
-    const bodyGeometry = new THREE.CylinderGeometry( 6, 6, 10, 32 );
-    const legGeometry = new THREE.CylinderGeometry( 3, 3, 10, 32 );
-    const headPosition = new THREE.Vector3(0,25,0).add(this.props.position);
-    const bodyPosition = new THREE.Vector3(0,15,0).add(this.props.position);
-    const legPosition = new THREE.Vector3(0,5,0).add(this.props.position);
+    const bodyGeometry = new THREE.CylinderGeometry(6, 6, 10, 32 );
+    const legGeometry = new THREE.CylinderGeometry(3, 3, 10, 32 );
+    const headPosition = new THREE.Vector3(0, 25, 0).add(this.props.position);
+    const bodyPosition = new THREE.Vector3(0, 15, 0).add(this.props.position);
+    const legPosition = new THREE.Vector3(0, 5, 0).add(this.props.position);
     return (
       <Object3D>
         <Mesh position={headPosition} geometry={headGeometry} material={material} />
@@ -52,10 +54,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  const onKeyPressed = (event)=>{dispatch(characterMove(event))};
+  const onKeyPressed = (event) => { dispatch(characterMove(event)); };
   return {
-    onMount: () => { keyEmitter.on(keys,onKeyPressed)},
-    onUnmount: () => { keyEmitter.off(keys,onKeyPressed)}
+    onMount: () => { keyEmitter.on(keys, onKeyPressed); },
+    onUnmount: () => { keyEmitter.off(keys, onKeyPressed); },
   };
 };
 

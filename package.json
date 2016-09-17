@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "js-beautify": "node_modules/.bin/js-beautify -r $(git diff --name-only | grep -e '\\.js$')",
     "start": "node_modules/.bin/babel-node ./server/app.js",
     "build": "webpack --progress --color -p --config webpack.prod.config.js",
     "lint": "eslint --ignore-path .gitignore . ; exit 0"
@@ -38,12 +37,11 @@
     "babel-preset-react": "6.11.1",
     "babel-preset-stage-0": "6.5.0",
     "babel-runtime": "6.11.6",
-    "eslint": "3.4.0",
+    "eslint": "3.5.0",
     "eslint-config-airbnb": "11.0.0",
     "eslint-plugin-import": "1.14.0",
     "eslint-plugin-jsx-a11y": "2.2.1",
     "eslint-plugin-react": "6.2.0",
-    "js-beautify": "1.6.4",
     "redux-devtools": "3.3.1",
     "redux-devtools-dock-monitor": "1.1.1",
     "redux-devtools-log-monitor": "1.0.11",

@@ -1,4 +1,5 @@
 import React from 'react';
+
 const ReactTHREE = require('react-three');
 const THREE = require('three');
 
@@ -8,15 +9,15 @@ const Mesh = ReactTHREE.Mesh;
 const Map = ({ children }) => {
   const material = new THREE.MeshBasicMaterial({
     color: 0x00ff00,
-    side: THREE.DoubleSide
+    side: THREE.DoubleSide,
   });
   const geometry = new THREE.PlaneGeometry(1600, 1600, 1, 1);
-  geometry.rotateX(Math.PI/2)
+  geometry.rotateX(Math.PI / 2);
   const position = new THREE.Vector3(0, 0, 0);
 
   return (
     <Object3D>
-      <ReactTHREE.AxisHelper size={800}/>
+      <ReactTHREE.AxisHelper size={800} />
       <Mesh position={position} geometry={geometry} material={material} />
       { children }
     </Object3D>
@@ -24,7 +25,7 @@ const Map = ({ children }) => {
 };
 
 Map.propTypes = {
-  children: React.PropTypes.element.isRequired
+  children: React.PropTypes.element.isRequired,
 };
 
 export default Map;

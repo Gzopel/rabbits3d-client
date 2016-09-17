@@ -10,26 +10,32 @@ class GameLoaderComponent extends React.Component {
     this.didLoad = false;
   }
 
-  componentDidMount() {
-    setTimeout(()=>{
-      this.didLoad=true;
-      this.forceUpdate()//fake server load
-    },4000);
-
-    this.props.onDidMount();
-  }
   componentWillMount() {
     this.props.onWillMount();
   }
 
-  componentWillUnmount(){
+  componentDidMount() {
+    this.timeout = setTimeout(() => {
+      this.didLoad = true;
+      this.forceUpdate();// fake server load
+    }, 4000);
+
+    this.props.onDidMount();
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
+  }
+
+  componentWillUnmount() {
     this.props.onWillUnmount();
   }
 
   render() {
-    if (!this.didLoad)
-      return <LoadingScreen size={this.props.size}/>;;
-    return <Game size={this.props.size}/>;
+    if (!this.didLoad) {
+      return <LoadingScreen size={this.props.size} />;
+    }
+    return <Game size={this.props.size} />;
   }
 }
 
@@ -44,17 +50,17 @@ GameLoaderComponent.propTypes = {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  const resize = ()=>{dispatch(BrowserActions.updateViewportSize())}
-  const onDidMount = ()=>{
+  const resize = () => { dispatch(BrowserActions.updateViewportSize()); };
+  const onDidMount = () => {
     dispatch(BrowserActions.addEventListener('Game', 'resize', resize));
-  }
-  const onWillUnmount = ()=>{
+  };
+  const onWillUnmount = () => {
     dispatch(BrowserActions.addEventListener('Game', 'resize', resize));
-  }
+  };
   return {
     onDidMount: onDidMount,
     onWillMount: resize,
-    onWillUnmount:onWillUnmount
+    onWillUnmount: onWillUnmount,
   };
 };
 
