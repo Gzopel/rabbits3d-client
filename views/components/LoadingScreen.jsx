@@ -15,6 +15,7 @@ class LoadingScreen extends React.Component {
     this.loadFont();
   }
 
+  // TODO: create actions for loading resources.
   loadFont() {
     const loader = new THREE.XHRLoader(THREE.DefaultLoadingManager);
     loader.load('fonts/helvetiker_regular.typeface.json', (font) => {

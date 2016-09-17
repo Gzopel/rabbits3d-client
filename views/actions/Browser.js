@@ -1,14 +1,18 @@
 import ACTIONS from '../actions';
 
-export const registerEventSuccess = (event) => ({
-  type: ACTIONS.BROWSER.REGISTER_EVENT_SUCCESS,
-  event: event,
-});
+export const registerEventSuccess = (event) => {
+  return {
+    type: ACTIONS.BROWSER.REGISTER_EVENT_SUCCESS,
+    event: event,
+  };
+};
 
-export const unregisterEventSuccess = (event) => ({
-  type: ACTIONS.BROWSER.UNREGISTER_EVENT_SUCCESS,
-  event: event,
-});
+export const unregisterEventSuccess = (event) => {
+  return {
+    type: ACTIONS.BROWSER.UNREGISTER_EVENT_SUCCESS,
+    event: event,
+  };
+};
 
 export const updateViewportSize = () => {
   return {

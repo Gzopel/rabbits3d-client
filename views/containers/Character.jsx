@@ -14,11 +14,15 @@ const keys = [KEYS.W, KEYS.A, KEYS.S, KEYS.D];
 
 class MovingCharacter extends React.Component {
   componentDidMount = () => {
-      this.props.onMount();
+    keyEmitter.on(keys, this.onKeyPressed);
   };
 
   componentWillUnmount = () => {
-      this.props.onUnmount();
+    keyEmitter.off(keys, this.onKeyPressed);
+  };
+
+  onKeyPressed = (event) => {
+    this.props.dispatch(characterMove(event));
   };
 
   render() {
@@ -42,8 +46,7 @@ class MovingCharacter extends React.Component {
 }
 
 MovingCharacter.propTypes = {
-  onUnmount: React.PropTypes.func.isRequired,
-  onMount: React.PropTypes.func.isRequired,
+  dispatch: React.PropTypes.func.isRequired,
   position: React.PropTypes.object.isRequired
 };
 
@@ -54,10 +57,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  const onKeyPressed = (event) => { dispatch(characterMove(event)); };
   return {
-    onMount: () => { keyEmitter.on(keys, onKeyPressed); },
-    onUnmount: () => { keyEmitter.off(keys, onKeyPressed); },
+    dispatch: dispatch,
   };
 };
 

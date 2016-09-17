@@ -36,7 +36,7 @@ const BrowserReducer = (state = InitialState, action) => {
         },
       };
     default:
-     return state;
+      return state;
   }
 };
 

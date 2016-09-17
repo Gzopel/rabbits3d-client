@@ -1,8 +1,8 @@
 {
   "name": "rabbits3d-client",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "server/app.js",
   "scripts": {
     "start": "node_modules/.bin/babel-node ./server/app.js",
     "build": "webpack --progress --color -p --config webpack.prod.config.js",
@@ -23,7 +23,9 @@
     "react-three": "0.9.4",
     "redux": "3.6.0",
     "redux-thunk": "2.1.0",
-    "three": "0.74.0"
+    "three": "0.74.0",
+    "webpack": "1.13.2",
+    "winston": "2.2.0"
   },
   "devDependencies": {
     "babel-cli": "6.14.0",
@@ -45,7 +47,6 @@
     "redux-devtools": "3.3.1",
     "redux-devtools-dock-monitor": "1.1.1",
     "redux-devtools-log-monitor": "1.0.11",
-    "webpack": "1.13.2",
     "webpack-dev-middleware": "1.6.1",
     "webpack-hot-middleware": "2.12.2"
   }

@@ -1,5 +1,5 @@
-var webpack = require('webpack');
-var base = require('./webpack.base');
+const webpack = require('webpack');
+const base = require('./webpack.base');
 
 base.host = 'localhost';
 base.port = 1234;

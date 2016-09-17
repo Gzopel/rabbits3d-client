@@ -1,6 +1,7 @@
 import webpack from 'webpack';
 import WebpackDevMiddleware from 'webpack-dev-middleware';
 import WebpackHotMiddleware from 'webpack-hot-middleware';
+import winston from 'winston';
 import express from 'express';
 import config from '../webpack.dev.config';
 
@@ -19,4 +20,4 @@ app.use(WebpackHotMiddleware(compiler));
 app.use(express.static(config.output.path));
 
 app.listen(config.port);
-console.log(`Listening at http://${config.host}:${config.port}`);
+winston.log(`Listening at http://${config.host}:${config.port}`);

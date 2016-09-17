@@ -29,7 +29,7 @@ export const cameraReducer = (state = cameraInitialState, action) => {
           lookat: nextPosition(state.cameraConfig.lookat, action),
           position: nextPosition(state.cameraConfig.position, action),
         },
-      }
+      };
     default:
       return state;
   }

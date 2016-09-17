@@ -11,24 +11,24 @@ class GameLoaderComponent extends React.Component {
   }
 
   componentWillMount() {
-    this.props.onWillMount();
+    this.resizeGameScene();
   }
 
   componentDidMount() {
     this.timeout = setTimeout(() => {
       this.didLoad = true;
       this.forceUpdate();// fake server load
-    }, 4000);
-
-    this.props.onDidMount();
+    }, 2000);
+    this.props.dispatch(BrowserActions.addEventListener('Game', 'resize', this.resizeGameScene));
   }
 
   componentWillUnmount() {
+    this.props.dispatch(BrowserActions.removeEventListener('Game', 'resize', this.resizeGameScene));
     clearTimeout(this.timeout);
   }
 
-  componentWillUnmount() {
-    this.props.onWillUnmount();
+  resizeGameScene() {
+    this.props.dispatch(BrowserActions.updateViewportSize());
   }
 
   render() {
@@ -40,27 +40,16 @@ class GameLoaderComponent extends React.Component {
 }
 
 GameLoaderComponent.propTypes = {
-  onDidMount: React.PropTypes.func.isRequired,
-  onWillMount: React.PropTypes.func.isRequired,
-  onWillUnmount:React.PropTypes.func.isRequired,
+  dispatch: React.PropTypes.func.isRequired,
   size: React.PropTypes.shape({
     width: React.PropTypes.number,
     height: React.PropTypes.number,
-  })
-}
+  }),
+};
 
 const mapDispatchToProps = (dispatch) => {
-  const resize = () => { dispatch(BrowserActions.updateViewportSize()); };
-  const onDidMount = () => {
-    dispatch(BrowserActions.addEventListener('Game', 'resize', resize));
-  };
-  const onWillUnmount = () => {
-    dispatch(BrowserActions.addEventListener('Game', 'resize', resize));
-  };
   return {
-    onDidMount: onDidMount,
-    onWillMount: resize,
-    onWillUnmount: onWillUnmount,
+    dispatch: dispatch,
   };
 };
 
