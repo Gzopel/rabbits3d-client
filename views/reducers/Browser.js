@@ -1,6 +1,5 @@
 import ACTIONS from '../actions';
 
-// TODO: Make state immutable
 const InitialState = {
   size: {},
   events: [],
@@ -12,8 +11,7 @@ const BrowserReducer = (state = InitialState, action) => {
       return {
         size: state.size,
         events: [
-          ...state.events,
-          {
+          ...state.events, {
             event: action.event,
             registered: true,
           },
@@ -23,14 +21,13 @@ const BrowserReducer = (state = InitialState, action) => {
       return {
         size: state.size,
         events: [
-          ...state.events,
-          {
+          ...state.events, {
             event: action.event,
             registered: false,
           },
         ],
       };
-    case ACTIONS.BROWSER.UPDATE_VIEWPORT_SIZE: {
+    case ACTIONS.BROWSER.UPDATE_VIEWPORT_SIZE:
       return {
         ...state,
         size: {
@@ -38,7 +35,6 @@ const BrowserReducer = (state = InitialState, action) => {
           height: action.size.height,
         },
       };
-    }
     default:
       return state;
   }

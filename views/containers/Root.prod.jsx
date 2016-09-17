@@ -1,13 +1,13 @@
 import React from 'react';
 import { Router, Route } from 'react-router';
 import { Provider } from 'react-redux';
-import Game from '../containers/Game';
+import GameLoader from '../containers/GameLoader';
 
 const Root = ({ store, history }) => {
   return (
     <Provider store={store}>
       <Router history={history} >
-        <Route path="/" component={Game} />
+        <Route path="/" component={GameLoader} />
       </Router>
     </Provider>
   );

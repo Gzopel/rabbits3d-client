@@ -2,13 +2,16 @@ const ACTIONS = {
   RESET: 'RESET',
   IDLE: 'IDLE',
   MOVE: {
-    UP: 'UP',
+    FOWARD: 'FOWARD',
     LEFT: 'LEFT',
-    DOWN: 'DOWN',
+    BACK: 'BACK',
     RIGHT: 'RIGHT',
   },
   CAMERA: {
     ROTATE: 'ROTATE',
+  },
+  CHARACTER: {
+    WALK: 'WALK',
   },
   BROWSER: {
     REGISTER_EVENT_SUCCESS: 'REGISTER_EVENT_SUCCESS',

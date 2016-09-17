@@ -1,10 +1,10 @@
-var webpack = require('webpack');
-var base = require('./webpack.base');
+const webpack = require('webpack');
+const base = require('./webpack.base');
 
 base.devtool = 'source-map';
 base.plugins = base.plugins.concat([
   new webpack.optimize.UglifyJsPlugin({
-    comments: false
+    comments: false,
   }),
   new webpack.DefinePlugin({
     'process.env': {

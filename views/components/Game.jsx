@@ -1,25 +1,25 @@
 import React from 'react';
-import GameScene from './GameScene';
-import Map from './Map';
-import Character from './Character';
-import * as BrowserActions from '../actions/Browser';
+import keydrown from 'keydrown';
+import GameScene from '../components/GameScene';
+import Map from '../components/Map';
+import Tree from '../components/Tree';
+import Character from '../containers/Character';
+import Exit from '../components/Exit';
 
-class Game extends React.Component {
-  componentWillMount() {
-    this.resizeGameScene();
-  }
+const ReactTHREE = require('react-three');
 
+const Object3D = ReactTHREE.Object3D;
+
+class GameComponent extends React.Component {
   componentDidMount() {
-    this.props.dispatch(
-      BrowserActions.addEventListener('Game', 'resize', this.resizeGameScene)
-    );
+    keydrown.run(function () {
+      keydrown.tick();
+    });
   }
 
-  resizeGameScene = () => {
-    this.props.dispatch(
-      BrowserActions.updateViewportSize()
-    );
-  };
+  componentWillUnmount() {
+    keydrown.stop();
+  }
 
   render() {
     if (!this.props.size.width || !this.props.size.height) {
@@ -29,19 +29,32 @@ class Game extends React.Component {
     return (
       <GameScene width={this.props.size.width} height={this.props.size.height}>
         <Map>
-          <Character />
+          <Object3D>
+            <Character />
+            <Exit x={780} z={0} />
+            <Exit x={-780} z={0} />
+            <Exit x={0} z={780} />
+            <Exit x={0} z={-780} />
+            <Tree x={300} z={300} />
+            <Tree x={780} z={200} />
+            <Tree x={200} z={780} />
+            <Tree x={780} z={780} />
+            <Tree x={200} z={200} />
+            <Tree x={378} z={200} />
+            <Tree x={200} z={378} />
+            <Tree x={378} z={378} />
+          </Object3D>
         </Map>
       </GameScene>
     );
   }
 }
 
-Game.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
+GameComponent.propTypes = {
   size: React.PropTypes.shape({
     width: React.PropTypes.number,
     height: React.PropTypes.number,
   }),
 };
 
-export default Game;
+export default GameComponent;

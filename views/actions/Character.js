@@ -3,27 +3,25 @@ import KEYS from '../keys';
 
 const mapCharToDirection = (key) => {
   switch (key) {
-    case KEYS.I:
+    case KEYS.W:
       return ACTIONS.MOVE.FOWARD;
-    case KEYS.J:
+    case KEYS.A:
       return ACTIONS.MOVE.LEFT;
-    case KEYS.K:
+    case KEYS.S:
       return ACTIONS.MOVE.BACK;
-    case KEYS.L:
+    case KEYS.D:
       return ACTIONS.MOVE.RIGHT;
-    case KEYS.ENTER:
-      return ACTIONS.RESET;
     default:
       return ACTIONS.IDLE;
   }
 };
 
-export const cameraRotation = (key) => {
+export const characterMove = (key) => {
   return {
-    type: ACTIONS.CAMERA.ROTATE,
+    type: ACTIONS.CHARACTER.WALK,
     direction: mapCharToDirection(key),
-    speed: 5,
+    speed: 10,
   };
 };
 
-export default cameraRotation;
+export default characterMove;
