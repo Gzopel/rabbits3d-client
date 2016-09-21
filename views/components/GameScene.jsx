@@ -9,7 +9,7 @@ const Scene = ReactTHREE.Scene;
 const GameScene = ({ width, height, children }) => {
   return (
     <Renderer width={width} height={height}>
-      <Scene width={width} height={height} camera="maincamera">
+      <Scene width={width} height={height} camera="maincamera" pointerEvents={['onClick']} >
         <Camera />
         {children}
       </Scene>

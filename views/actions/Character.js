@@ -24,4 +24,12 @@ export const characterMove = (key) => {
   };
 };
 
+export const characterMoveToPoint = (point) => {
+  return {
+    type: ACTIONS.CHARACTER.WALK_TO_POINT,
+    point: point,
+    speed: 10,
+  };
+}
+
 export default characterMove;

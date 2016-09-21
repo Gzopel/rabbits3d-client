@@ -30,13 +30,13 @@ class MovingCharacter extends React.Component {
       color: 0xff0000,
     });
     const headGeometry = new THREE.SphereGeometry(5, 32, 32);
-    const bodyGeometry = new THREE.CylinderGeometry(6, 6, 10, 32 );
-    const legGeometry = new THREE.CylinderGeometry(3, 3, 10, 32 );
+    const bodyGeometry = new THREE.CylinderGeometry(6, 6, 10, 32);
+    const legGeometry = new THREE.CylinderGeometry(3, 3, 10, 32);
     const headPosition = new THREE.Vector3(0, 25, 0).add(this.props.position);
     const bodyPosition = new THREE.Vector3(0, 15, 0).add(this.props.position);
     const legPosition = new THREE.Vector3(0, 5, 0).add(this.props.position);
     return (
-      <Object3D>
+      <Object3D lookAt={this.props.orientation}>
         <Mesh position={headPosition} geometry={headGeometry} material={material} />
         <Mesh position={bodyPosition} geometry={bodyGeometry} material={material} />
         <Mesh position={legPosition} geometry={legGeometry} material={material} />
@@ -47,13 +47,8 @@ class MovingCharacter extends React.Component {
 
 MovingCharacter.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
-  position: React.PropTypes.object.isRequired
-};
-
-const mapStateToProps = (state) => {
-  return {
-    position: state.CharacterCamera.characterPosition,
-  };
+  position: React.PropTypes.object.isRequired,
+  orientation: React.PropTypes.object.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -64,7 +59,6 @@ const mapDispatchToProps = (dispatch) => {
 
 
 const Character = connect(
-  mapStateToProps,
   mapDispatchToProps
 )(MovingCharacter);
 

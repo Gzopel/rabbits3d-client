@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Game from '../components/Game';
+import Game from '../containers/Game';
 import LoadingScreen from '../components/LoadingScreen';
 import * as BrowserActions from '../actions/Browser';
 

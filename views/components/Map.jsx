@@ -6,7 +6,7 @@ const THREE = require('three');
 const Object3D = ReactTHREE.Object3D;
 const Mesh = ReactTHREE.Mesh;
 
-const Map = ({ children }) => {
+const Map = ({ children, onClick }) => {
   const material = new THREE.MeshBasicMaterial({
     color: 0x00ff00,
     side: THREE.DoubleSide,
@@ -18,14 +18,21 @@ const Map = ({ children }) => {
   return (
     <Object3D>
       <ReactTHREE.AxisHelper size={800} />
-      <Mesh position={position} geometry={geometry} material={material} />
+      <Mesh
+        position={position}
+        geometry={geometry}
+        material={material}
+        onClick3D={onClick}
+      />
       { children }
     </Object3D>
   );
-};
+}
 
 Map.propTypes = {
+  onClick: React.PropTypes.func.isRequired,
   children: React.PropTypes.element.isRequired,
 };
+
 
 export default Map;

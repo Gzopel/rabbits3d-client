@@ -9,6 +9,7 @@ const initialState = {
 
 const characterCameraReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ACTIONS.CHARACTER.WALK_TO_POINT:
     case ACTIONS.CHARACTER.WALK:
       return {
         ...characterReducer(state, action),

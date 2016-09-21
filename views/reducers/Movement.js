@@ -19,4 +19,15 @@ export const nextPosition = (position, action) => {
   }
 };
 
+export const nextPositionToPoint = (position, action) => {
+  const speed = action.speed || 1;
+  const vector = action.point.clone().sub(position);
+  vector.normalize();
+  vector.setY(0);
+  vector.multiplyScalar(speed);
+  const newPosition = vector.add(position);
+  console.log("NEXT POSITION", position, " -> ", newPosition);
+  return newPosition;
+}
+
 export default nextPosition;
