@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import React from 'react';
-import { characterMove } from '../actions/Character';
 import keyEmitter from '../KeyEventEmitter';
 import KEYS from '../keys';
 
@@ -22,7 +21,7 @@ class MovingCharacter extends React.Component {
   };
 
   onKeyPressed = (event) => {
-    this.props.dispatch(characterMove(event));
+    // TODO bindings for actions Q,W,E,R,T items 1,2,3,4,5
   };
 
   render() {
@@ -51,11 +50,9 @@ MovingCharacter.propTypes = {
   orientation: React.PropTypes.object.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatch: dispatch,
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  dispatch: dispatch,
+});
 
 
 const Character = connect(

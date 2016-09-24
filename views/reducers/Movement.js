@@ -26,7 +26,6 @@ export const nextPositionToPoint = (position, action) => {
   vector.setY(0);
   vector.multiplyScalar(speed);
   const newPosition = vector.add(position);
-  console.log("NEXT POSITION", position, " -> ", newPosition);
   return newPosition;
 }
 

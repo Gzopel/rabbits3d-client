@@ -27,7 +27,7 @@ class GameLoaderComponent extends React.Component {
     clearTimeout(this.timeout);
   }
 
-  resizeGameScene() {
+  resizeGameScene = () => {
     this.props.dispatch(BrowserActions.updateViewportSize());
   }
 

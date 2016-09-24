@@ -9,6 +9,10 @@ const ReactTHREE = require('react-three');
 const PerspectiveCamera = ReactTHREE.PerspectiveCamera;
 const keys = [KEYS.J, KEYS.K, KEYS.L, KEYS.I, KEYS.ENTER];
 
+const rotateCamera = ({ cameraRotation },event) => {
+  cameraRotation(event);
+}
+
 class MovingCamera extends React.Component {
   componentDidMount = () => {
     keyEmitter.on(keys, this.onKeyPressed);
@@ -19,7 +23,7 @@ class MovingCamera extends React.Component {
   };
 
   onKeyPressed = (event) => {
-    this.props.dispatch(cameraRotation(event));
+    rotateCamera(this.props, event);
   };
 
   render() {
@@ -46,23 +50,15 @@ MovingCamera.propTypes = {
   aspect: React.PropTypes.number.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    config: state.CharacterCamera.cameraConfig,
-    aspect: state.Browser.size.width / state.Browser.size.height,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatch: dispatch,
-  };
-};
+const mapStateToProps = (state) => ({
+  config: state.Camera.cameraConfig,
+  aspect: state.Browser.size.width / state.Browser.size.height,
+});
 
 
 const Camera = connect(
   mapStateToProps,
-  mapDispatchToProps
+  { cameraRotation }
 )(MovingCamera);
 
 export default Camera;

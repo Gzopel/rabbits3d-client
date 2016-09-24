@@ -32,8 +32,8 @@ class GameComponent extends React.Component {
     clearInterval(this.loop);
   }
 
-  moveCharacterOnClick = (event, instersection) => {
-    this.moveTarget = instersection.point;
+  moveCharacterOnClick = (event, intersection) => {
+    this.moveTarget = intersection.point;
   }
 
   render() {
@@ -76,17 +76,14 @@ GameComponent.propTypes = {
     height: React.PropTypes.number,
   }),
 };
-const mapStateToProps = (state) => {
-  console.log("STATE", state.CharacterCamera.characterPosition);
-  return {
-    characterPosition: state.CharacterCamera.characterPosition,
-  };
-};
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatch: dispatch,
-  };
-};
+
+const mapStateToProps = state => ({
+  characterPosition: state.Character.characterPosition,
+});
+
+const mapDispatchToProps = dispatch => ({
+  dispatch: dispatch,
+});
 
 const Game = connect(
   mapStateToProps,
