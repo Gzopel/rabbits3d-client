@@ -20,7 +20,7 @@ export const nextPosition = (position, action) => {
 };
 
 
-// TODO: the match in here could use some love.
+// TODO: the math in here could use some love.
 export const nextPositionToPoint = (position, action) => {
   const speed = action.speed || 1;
   const vector = action.point.clone().sub(position);

@@ -1,5 +1,4 @@
 import ACTIONS from '../actions';
-import KEYS from '../keys';
 
 export const characterMoveToPoint = (from, target) => ({
   type: ACTIONS.CHARACTER.WALK,

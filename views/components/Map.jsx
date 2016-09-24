@@ -27,7 +27,7 @@ const Map = ({ children, onClick }) => {
       { children }
     </Object3D>
   );
-}
+};
 
 Map.propTypes = {
   onClick: React.PropTypes.func.isRequired,

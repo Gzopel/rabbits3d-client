@@ -5,8 +5,7 @@ const Three = require('three');
 
 const InitialState = {
   characterPosition: new Three.Vector3(0, 0, 0),
-  //walkTarget: new Three.Vector3(0, 0, 0),
-  characterRotation: new Three.Euler(0,0,0,'XYZ'),
+  characterRotation: new Three.Euler(0, 0, 0, 'XYZ'),
 };
 
 const Character = (state = InitialState, action) => {
@@ -19,11 +18,11 @@ const Character = (state = InitialState, action) => {
       /*
       * OK, so this works, but its a hack. We are doing something wrong here but what?
       * */
-      const r = new Three.Euler().setFromQuaternion(new Three.Quaternion().setFromUnitVectors(fromV, toV).normalize(),'XYZ');
+      const rotation = new Three.Euler().setFromQuaternion(
+        new Three.Quaternion().setFromUnitVectors(fromV, toV).normalize(), 'XYZ');
       return {
         characterPosition: nextPosition,
-     //   walkTarget: action.point,
-        characterRotation: r,
+        characterRotation: rotation,
       };
     default:
       return state;
