@@ -47,17 +47,13 @@ GameLoaderComponent.propTypes = {
   }),
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatch: dispatch,
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  dispatch: dispatch,
+});
 
-const mapStateToProps = (state) => {
-  return {
-    size: state.Browser.size,
-  };
-};
+const mapStateToProps = state => ({
+  size: state.Browser.size,
+});
 
 const GameLoader = connect(
   mapStateToProps,

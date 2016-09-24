@@ -9,9 +9,9 @@ const ReactTHREE = require('react-three');
 const PerspectiveCamera = ReactTHREE.PerspectiveCamera;
 const keys = [KEYS.J, KEYS.K, KEYS.L, KEYS.I, KEYS.ENTER];
 
-const rotateCamera = ({ cameraRotation },event) => {
+const rotateCamera = ({ cameraRotation }, event) => {
   cameraRotation(event);
-}
+};
 
 class MovingCamera extends React.Component {
   componentDidMount = () => {

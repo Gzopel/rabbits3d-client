@@ -9,7 +9,7 @@ const THREE = require('three');
 const Object3D = ReactTHREE.Object3D;
 const Mesh = ReactTHREE.Mesh;
 
-const keys = [KEYS.W, KEYS.A, KEYS.S, KEYS.D];
+const keys = [KEYS.Q, KEYS.W, KEYS.E, KEYS.R, KEYS.T];
 
 class MovingCharacter extends React.Component {
   componentDidMount = () => {
@@ -22,6 +22,8 @@ class MovingCharacter extends React.Component {
 
   onKeyPressed = (event) => {
     // TODO bindings for actions Q,W,E,R,T items 1,2,3,4,5
+    // keydrown doesn't have support for numeric keys,
+    // at least until https://github.com/jeremyckahn/keydrown/pull/12 gets merged :)
   };
 
   render() {

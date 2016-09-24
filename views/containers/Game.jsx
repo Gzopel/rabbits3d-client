@@ -20,6 +20,7 @@ class GameComponent extends React.Component {
   }
 
   componentDidMount() {
+    // TODO create a component that handles the loop, game should dispatch an action for it to start/stop looping
     this.loop = setInterval(() => {
       keydrown.tick();
       if (!this.moveTarget.equals(this.props.characterPosition)) {
@@ -41,6 +42,7 @@ class GameComponent extends React.Component {
       return false;
     }
 
+    // TODO: create a factory of children elements based on a map config
     return (
       <GameScene width={this.props.size.width} height={this.props.size.height}>
         <Map onClick={this.moveCharacterOnClick} >
@@ -86,7 +88,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   dispatch: dispatch,
 });
-
 
 const Game = connect(
   mapStateToProps,
