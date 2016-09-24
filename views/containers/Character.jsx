@@ -26,19 +26,40 @@ class MovingCharacter extends React.Component {
 
   render() {
     const material = new THREE.MeshBasicMaterial({
-      color: 0xff0000,
+      color: 0xffffff,
     });
-    const headGeometry = new THREE.SphereGeometry(5, 32, 32);
-    const bodyGeometry = new THREE.CylinderGeometry(6, 6, 10, 32);
-    const legGeometry = new THREE.CylinderGeometry(3, 3, 10, 32);
-    const headPosition = new THREE.Vector3(0, 25, 0).add(this.props.position);
-    const bodyPosition = new THREE.Vector3(0, 15, 0).add(this.props.position);
-    const legPosition = new THREE.Vector3(0, 5, 0).add(this.props.position);
+    const eyeMaterial = new THREE.MeshBasicMaterial({
+      color: 0x000000,
+    });
+    const innerEarMaterial = new THREE.MeshBasicMaterial({
+      color: 0xFF44FF,
+    });
+    const headGeometry = new THREE.SphereGeometry(6, 32, 32);
+    const bodyGeometry = new THREE.CylinderGeometry(7, 7, 10, 32);
+    const legGeometry = new THREE.CylinderGeometry(4, 4, 10, 32);
+    const earGeometry = new THREE.CylinderGeometry(2, 2, 15, 32);
+    const innerEarGeometry = new THREE.CylinderGeometry(1, 1, 10, 32);
+    const eyeGeometry = new THREE.SphereGeometry(2.5, 32, 32);
+    const headPosition = new THREE.Vector3(0, 26, 0);
+    const bodyPosition = new THREE.Vector3(0, 15, 0);
+    const legPosition = new THREE.Vector3(0, 5, 0);
+    const leftEarPosition = new THREE.Vector3(-3, 32, 0);
+    const rightEarPosition = new THREE.Vector3(3, 32, 0);
+    const leftInnerEarPosition = new THREE.Vector3(-3, 32, -2);
+    const rightInnerEarPosition = new THREE.Vector3(3, 32, -2);
+    const leftEyePosition = new THREE.Vector3(-2.5, 27, -6);
+    const rightEyePosition = new THREE.Vector3(2.5, 27, -6);
     return (
-      <Object3D lookAt={this.props.orientation}>
+      <Object3D rotation={this.props.rotation} position={this.props.position}>
         <Mesh position={headPosition} geometry={headGeometry} material={material} />
         <Mesh position={bodyPosition} geometry={bodyGeometry} material={material} />
         <Mesh position={legPosition} geometry={legGeometry} material={material} />
+        <Mesh position={leftEarPosition} geometry={earGeometry} material={material} />
+        <Mesh position={rightEarPosition} geometry={earGeometry} material={material} />
+        <Mesh position={leftInnerEarPosition} geometry={innerEarGeometry} material={innerEarMaterial} />
+        <Mesh position={rightInnerEarPosition} geometry={innerEarGeometry} material={innerEarMaterial} />
+        <Mesh position={leftEyePosition} geometry={eyeGeometry} material={eyeMaterial} />
+        <Mesh position={rightEyePosition} geometry={eyeGeometry} material={eyeMaterial} />
       </Object3D>
     );
   }
@@ -47,7 +68,7 @@ class MovingCharacter extends React.Component {
 MovingCharacter.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
   position: React.PropTypes.object.isRequired,
-  orientation: React.PropTypes.object.isRequired,
+  rotation: React.PropTypes.object.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

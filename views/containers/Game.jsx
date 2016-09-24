@@ -47,7 +47,7 @@ class GameComponent extends React.Component {
           <Object3D>
             <Character
               position={this.props.characterPosition}
-              orientation={this.moveTarget}
+              rotation={this.props.characterRotation}
             />
             <Exit x={780} z={0} />
             <Exit x={-780} z={0} />
@@ -71,6 +71,7 @@ class GameComponent extends React.Component {
 GameComponent.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
   characterPosition: React.PropTypes.object.isRequired,
+  characterRotation: React.PropTypes.object,
   size: React.PropTypes.shape({
     width: React.PropTypes.number,
     height: React.PropTypes.number,
@@ -79,11 +80,13 @@ GameComponent.propTypes = {
 
 const mapStateToProps = state => ({
   characterPosition: state.Character.characterPosition,
+  characterRotation: state.Character.characterRotation,
 });
 
 const mapDispatchToProps = dispatch => ({
   dispatch: dispatch,
 });
+
 
 const Game = connect(
   mapStateToProps,
