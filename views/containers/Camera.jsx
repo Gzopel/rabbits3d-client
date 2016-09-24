@@ -39,7 +39,6 @@ class MovingCamera extends React.Component {
 }
 
 MovingCamera.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
   config: React.PropTypes.shape({
     fov: React.PropTypes.number.isRequired,
     near: React.PropTypes.number.isRequired,

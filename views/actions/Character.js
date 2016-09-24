@@ -1,9 +1,10 @@
 import ACTIONS from '../actions';
 import KEYS from '../keys';
 
-export const characterMoveToPoint = point => ({
+export const characterMoveToPoint = (from, target) => ({
   type: ACTIONS.CHARACTER.WALK,
-  point: point,
+  characterPosition: from,
+  point: target,
   speed: 10,
 });
 

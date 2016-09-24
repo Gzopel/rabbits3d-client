@@ -23,7 +23,7 @@ class GameComponent extends React.Component {
     this.loop = setInterval(() => {
       keydrown.tick();
       if (!this.moveTarget.equals(this.props.characterPosition)) {
-        this.props.dispatch(characterMoveToPoint(this.moveTarget));
+        this.props.dispatch(characterMoveToPoint(this.props.characterPosition, this.moveTarget));
       }
     }, 17);
   }
