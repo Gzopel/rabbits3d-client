@@ -21,10 +21,10 @@ const MAX_FPS = 60;
 class GameComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.moveTarget = props.characterPosition;
     this.state = {
       maxFPS: MAX_FPS,
       timeStep: TIME_STEP,
+      clickedPosition: null,
       loop: null,
     };
   }
@@ -36,10 +36,7 @@ class GameComponent extends React.Component {
   onUpdateGame = (delta) => {
     // TODO: Take delta into account
     keydrown.tick();
-    const hasTargetMoved = !this.moveTarget.equals(this.props.characterPosition);
-    if (hasTargetMoved) {
-      this.props.dispatch(characterMoveToPoint(this.props.characterPosition, this.moveTarget));
-    }
+    this.props.dispatch(characterMoveToPoint(this.state.clickedPosition));
   };
 
   onDraw = () => {
@@ -84,10 +81,17 @@ class GameComponent extends React.Component {
   };
 
   moveCharacterOnClick = (event, intersection) => {
-    this.moveTarget = intersection.point;
+    if (event.preventDefault) {
+      event.preventDefault();
+    }
+
+    this.setState({
+      clickedPosition: intersection.point,
+    });
   };
 
   shouldComponentUpdate = () => {
+    // Overrides React Automatic Renders on State Change
     return false;
   };
 
