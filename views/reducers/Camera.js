@@ -1,9 +1,9 @@
 import ACTIONS from '../actions';
-import { nextPosition } from './Movement.js';
+import { nextPosition, nextPositionToPoint, nextCameraPositionToPoint } from './Movement.js';
 
 const Three = require('three');
 
-export const cameraInitialState = {
+const InitialState = {
   cameraConfig: {
     fov: 75,
     near: 1,
@@ -13,9 +13,17 @@ export const cameraInitialState = {
   },
 };
 
-export const cameraReducer = (state = cameraInitialState, action) => {
+const Camera = (state = InitialState, action) => {
   switch (action.type) {
     case ACTIONS.CAMERA.ROTATE:
+      if (action.direction === ACTIONS.RESET) {
+        return {
+          cameraConfig: {
+            ...state.cameraConfig,
+            lookat: action.characterPosition,
+          },
+        };
+      }
       return {
         cameraConfig: {
           ...state.cameraConfig,
@@ -26,11 +34,13 @@ export const cameraReducer = (state = cameraInitialState, action) => {
       return {
         cameraConfig: {
           ...state.cameraConfig,
-          lookat: nextPosition(state.cameraConfig.lookat, action),
-          position: nextPosition(state.cameraConfig.position, action),
+          lookat: nextPositionToPoint(state.cameraConfig.lookat, action),
+          position: nextCameraPositionToPoint(state.cameraConfig.position, action),
         },
       };
     default:
       return state;
   }
 };
+
+export default Camera;

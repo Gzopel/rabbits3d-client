@@ -18,12 +18,14 @@ const mapCharToDirection = (key) => {
   }
 };
 
-export const cameraRotation = (key) => {
-  return {
+export const cameraRotation = key => (dispatch, getState) => {
+  const { Character } = getState();
+  return dispatch({
     type: ACTIONS.CAMERA.ROTATE,
     direction: mapCharToDirection(key),
     speed: 5,
-  };
+    characterPosition: Character.characterPosition,
+  });
 };
 
 export default cameraRotation;

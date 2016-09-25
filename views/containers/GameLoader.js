@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Game from '../components/Game';
+import Game from '../containers/Game';
 import LoadingScreen from '../components/LoadingScreen';
 import * as BrowserActions from '../actions/Browser';
 
@@ -27,7 +27,7 @@ class GameLoaderComponent extends React.Component {
     clearTimeout(this.timeout);
   }
 
-  resizeGameScene() {
+  resizeGameScene = () => {
     this.props.dispatch(BrowserActions.updateViewportSize());
   }
 
@@ -47,17 +47,13 @@ GameLoaderComponent.propTypes = {
   }),
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatch: dispatch,
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  dispatch: dispatch,
+});
 
-const mapStateToProps = (state) => {
-  return {
-    size: state.Browser.size,
-  };
-};
+const mapStateToProps = state => ({
+  size: state.Browser.size,
+});
 
 const GameLoader = connect(
   mapStateToProps,

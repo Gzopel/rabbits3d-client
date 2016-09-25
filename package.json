@@ -14,7 +14,7 @@
     "babel-polyfill": "6.13.0",
     "event-emitter": "0.3.4",
     "express": "4.14.0",
-    "keydrown": "1.2.2",
+    "keydrown": "1.2.3",
     "lodash": "4.15.0",
     "react": "15.3.1",
     "react-dom": "15.3.1",
