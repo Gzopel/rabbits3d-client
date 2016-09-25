@@ -17,7 +17,7 @@ const Tree = ({ x, z }) => {
         />
       </mesh>
       <mesh key={THREE.Math.generateUUID()} position={new THREE.Vector3(x, 15, z)}>
-        <cilinderGeometry
+        <cylinderGeometry
           radiusTop={6}
           radiusBottom={6}
           height={30}
