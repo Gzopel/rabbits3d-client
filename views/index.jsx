@@ -8,9 +8,9 @@ if (module.hot) {
   module.hot.accept();
 }
 
-const store = configureStore();
+window.reduxStore = configureStore();
 
 render((
-  <Root store={store} history={browserHistory} />
+  <Root store={window.reduxStore} history={browserHistory} />
   ),
   document.getElementById('app'));

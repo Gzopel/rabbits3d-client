@@ -1,17 +1,12 @@
 import React from 'react';
+import React3 from 'react-three-renderer';
 import { connect } from 'react-redux';
+
 import { cameraRotation } from '../actions/Camera';
 import keyEmitter from '../KeyEventEmitter';
 import KEYS from '../keys';
 
-const ReactTHREE = require('react-three');
-
-const PerspectiveCamera = ReactTHREE.PerspectiveCamera;
 const keys = [KEYS.J, KEYS.K, KEYS.L, KEYS.I, KEYS.ENTER];
-
-const rotateCamera = ({ cameraRotation }, event) => {
-  cameraRotation(event);
-};
 
 class MovingCamera extends React.Component {
   componentDidMount = () => {
@@ -23,7 +18,7 @@ class MovingCamera extends React.Component {
   };
 
   onKeyPressed = (event) => {
-    rotateCamera(this.props, event);
+    this.props.dispatch(cameraRotation(event));
   };
 
   render() {
@@ -33,12 +28,13 @@ class MovingCamera extends React.Component {
     };
 
     return (
-      <PerspectiveCamera name="maincamera" {...cameraConfig} />
+      <perspectiveCamera name="maincamera" {...cameraConfig} />
     );
   }
 }
 
 MovingCamera.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
   config: React.PropTypes.shape({
     fov: React.PropTypes.number.isRequired,
     near: React.PropTypes.number.isRequired,
@@ -54,10 +50,8 @@ const mapStateToProps = (state) => ({
   aspect: state.Browser.size.width / state.Browser.size.height,
 });
 
-
 const Camera = connect(
-  mapStateToProps,
-  { cameraRotation }
+  mapStateToProps
 )(MovingCamera);
 
 export default Camera;

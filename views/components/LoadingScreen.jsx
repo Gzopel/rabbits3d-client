@@ -1,7 +1,7 @@
 import React from 'react';
 import GameScene from '../components/GameScene';
 
-const ReactTHREE = require('react-three');
+//const ReactTHREE = require('react-three');
 const THREE = require('three');
 
 const Mesh = ReactTHREE.Mesh;

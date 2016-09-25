@@ -3,7 +3,7 @@ import React from 'react';
 import keyEmitter from '../KeyEventEmitter';
 import KEYS from '../keys';
 
-const ReactTHREE = require('react-three');
+//const ReactTHREE = require('react-three');
 const THREE = require('three');
 
 const Object3D = ReactTHREE.Object3D;

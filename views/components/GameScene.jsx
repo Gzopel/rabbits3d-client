@@ -1,19 +1,26 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import React3 from 'react-three-renderer';
 import Camera from '../containers/Camera';
-
-const ReactTHREE = require('react-three');
-
-const Renderer = ReactTHREE.Renderer;
-const Scene = ReactTHREE.Scene;
 
 const GameScene = ({ width, height, children }) => {
   return (
-    <Renderer width={width} height={height}>
-      <Scene width={width} height={height} camera="maincamera" pointerEvents={['onClick']} >
-        <Camera />
+    <React3
+      mainCamera="maincamera"
+      width={width}
+      height={height}
+      antialias
+      shadowMapEnabled={true}
+      clearColor={0x000000}
+      forceManualRender={false}
+    >
+      <scene>
+        <Provider store={window.reduxStore}>
+          <Camera />
+        </Provider>
         {children}
-      </Scene>
-    </Renderer>
+      </scene>
+    </React3>
   );
 };
 
