@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import keydrown from 'keydrown';
+import MainLoop from 'mainloop.js';
 import GameScene from '../components/GameScene';
 import Map from '../components/Map';
 import Tree from '../components/Tree';
@@ -8,33 +9,90 @@ import Character from '../containers/Character';
 import Exit from '../components/Exit';
 import { characterMoveToPoint } from '../actions/Character';
 
+
 const ReactTHREE = require('react-three');
 
 const Object3D = ReactTHREE.Object3D;
 
+const FPS = 60;
+const TIME_STEP = 1000 / FPS;
+const MAX_FPS = 60;
+
 class GameComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.loop = null;
     this.moveTarget = props.characterPosition;
+    this.state = {
+      maxFPS: MAX_FPS,
+      timeStep: TIME_STEP,
+      loop: null,
+    };
   }
 
-  componentDidMount() {
+  onBeginGame = () => {
+    // TODO: Implement
+  };
+
+  onUpdateGame = (delta) => {
+    // TODO: Take delta into account
+    keydrown.tick();
+    const hasTargetMoved = !this.moveTarget.equals(this.props.characterPosition);
+    if (hasTargetMoved) {
+      this.props.dispatch(characterMoveToPoint(this.props.characterPosition, this.moveTarget));
+    }
+  };
+
+  onDraw = () => {
+    this.forceUpdate();
+  };
+
+  onEndGame = (_, panic) => {
+    if (panic) {
+      this.state.loop.resetFrameDelta();
+    }
+  };
+
+  componentDidMount = () => {
     // TODO create a component that handles the loop, game should dispatch an action for it to start/stop looping
-    this.loop = setInterval(() => {
-      keydrown.tick();
-      if (!this.moveTarget.equals(this.props.characterPosition)) {
-        this.props.dispatch(characterMoveToPoint(this.props.characterPosition, this.moveTarget));
-      }
-    }, 17);
-  }
+    const loop = MainLoop
+      .setMaxAllowedFPS(this.state.maxFPS)
+      .setSimulationTimestep(this.state.timeStep)
+      .setBegin(this.onBeginGame)
+      .setUpdate(this.onUpdateGame)
+      .setDraw(this.onDraw)
+      .setEnd(this.onEndGame);
 
-  componentWillUnmount() {
-    clearInterval(this.loop);
-  }
+    this.setState({
+      loop,
+    });
+
+    if (this.props.run) {
+      loop.start();
+    }
+  };
+
+  componentWillUnmount = () => {
+    this.state.loop.stop();
+  };
+
+  shouldGameRun = (nextProps) => {
+    if (nextProps.run) {
+      this.state.loop.start();
+    } else {
+      this.state.loop.stop();
+    }
+  };
 
   moveCharacterOnClick = (event, intersection) => {
     this.moveTarget = intersection.point;
+  };
+
+  shouldComponentUpdate = () => {
+    return false;
+  };
+
+  componentWillReceiveProps(nextProps) {
+    this.shouldGameRun(nextProps);
   }
 
   render() {
@@ -78,6 +136,11 @@ GameComponent.propTypes = {
     width: React.PropTypes.number,
     height: React.PropTypes.number,
   }),
+  run: React.PropTypes.bool,
+};
+
+GameComponent.defaultProps = {
+  run: true,
 };
 
 const mapStateToProps = state => ({
