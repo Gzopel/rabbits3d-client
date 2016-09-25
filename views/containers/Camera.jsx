@@ -40,7 +40,7 @@ MovingCamera.propTypes = {
     near: React.PropTypes.number.isRequired,
     far: React.PropTypes.number.isRequired,
     position: React.PropTypes.object.isRequired,
-    lookat: React.PropTypes.object.isRequired,
+    lookAt: React.PropTypes.object.isRequired,
   }).isRequired,
   aspect: React.PropTypes.number.isRequired,
 };

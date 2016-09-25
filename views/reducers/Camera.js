@@ -9,7 +9,7 @@ const InitialState = {
     near: 1,
     far: 800,
     position: new Three.Vector3(0, 50, -200),
-    lookat: new Three.Vector3(0, 0, 0),
+    lookAt: new Three.Vector3(0, 0, 0),
   },
 };
 
@@ -20,21 +20,21 @@ const Camera = (state = InitialState, action) => {
         return {
           cameraConfig: {
             ...state.cameraConfig,
-            lookat: action.characterPosition,
+            lookAt: action.characterPosition,
           },
         };
       }
       return {
         cameraConfig: {
           ...state.cameraConfig,
-          lookat: nextPosition(state.cameraConfig.lookat, action),
+          lookAt: nextPosition(state.cameraConfig.lookat, action),
         },
       };
     case ACTIONS.CHARACTER.WALK:
       return {
         cameraConfig: {
           ...state.cameraConfig,
-          lookat: nextPositionToPoint(state.cameraConfig.lookat, action),
+          lookAt: nextPositionToPoint(state.cameraConfig.lookat, action),
           position: nextCameraPositionToPoint(state.cameraConfig.position, action),
         },
       };
