@@ -1,5 +1,4 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import React3 from 'react-three-renderer';
 import Camera from '../containers/Camera';
 
@@ -15,9 +14,7 @@ const GameScene = ({ width, height, children }) => {
       forceManualRender={false}
     >
       <scene>
-        <Provider store={window.reduxStore}>
-          <Camera />
-        </Provider>
+        <Camera />
         {children}
       </scene>
     </React3>

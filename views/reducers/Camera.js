@@ -27,14 +27,14 @@ const Camera = (state = InitialState, action) => {
       return {
         cameraConfig: {
           ...state.cameraConfig,
-          lookAt: nextPosition(state.cameraConfig.lookat, action),
+          lookAt: nextPosition(state.cameraConfig.lookAt, action),
         },
       };
     case ACTIONS.CHARACTER.WALK:
       return {
         cameraConfig: {
           ...state.cameraConfig,
-          lookAt: nextPositionToPoint(state.cameraConfig.lookat, action),
+          lookAt: nextPositionToPoint(state.cameraConfig.lookAt, action),
           position: nextCameraPositionToPoint(state.cameraConfig.position, action),
         },
       };

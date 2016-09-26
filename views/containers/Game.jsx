@@ -7,7 +7,7 @@ import MainLoop from 'mainloop.js';
 import GameScene from '../components/GameScene';
 import Map from '../components/Map';
 import Tree from '../components/Tree';
-//import Character from '../containers/Character';
+import Character from '../containers/Character';
 import Exit from '../components/Exit';
 import { characterMoveToPoint } from '../actions/Character';
 
@@ -106,6 +106,10 @@ class GameComponent extends React.Component {
       <GameScene width={this.props.size.width} height={this.props.size.height}>
         <Map onClick={this.moveCharacterOnClick}>
           <object3D>
+            <Character
+              position={this.props.characterPosition}
+              rotation={this.props.characterRotation}
+            />
             <Exit x={780} z={0} />
             <Exit x={-780} z={0} />
             <Exit x={0} z={780} />

@@ -1,13 +1,11 @@
-import { connect } from 'react-redux';
 import React from 'react';
+import React3 from 'react-three-renderer';
+import { connect } from 'react-redux';
 import keyEmitter from '../KeyEventEmitter';
 import KEYS from '../keys';
+import storeWrapper from './storeWrapper';
 
-//const ReactTHREE = require('react-three');
 const THREE = require('three');
-
-const Object3D = ReactTHREE.Object3D;
-const Mesh = ReactTHREE.Mesh;
 
 const keys = [KEYS.Q, KEYS.W, KEYS.E, KEYS.R, KEYS.T, KEYS.ONE, KEYS.TWO, KEYS.THREE, KEYS.FOUR, KEYS.FIVE];
 
@@ -25,21 +23,15 @@ class MovingCharacter extends React.Component {
   };
 
   render() {
-    const material = new THREE.MeshBasicMaterial({
+    const material = {
       color: 0xffffff,
-    });
-    const eyeMaterial = new THREE.MeshBasicMaterial({
+    };
+    const eyeMaterial = {
       color: 0x000000,
-    });
-    const innerEarMaterial = new THREE.MeshBasicMaterial({
+    };
+    const innerEarMaterial = {
       color: 0xFF44FF,
-    });
-    const headGeometry = new THREE.SphereGeometry(6, 32, 32);
-    const bodyGeometry = new THREE.CylinderGeometry(7, 7, 10, 32);
-    const legGeometry = new THREE.CylinderGeometry(4, 4, 10, 32);
-    const earGeometry = new THREE.CylinderGeometry(2, 2, 15, 32);
-    const innerEarGeometry = new THREE.CylinderGeometry(1, 1, 10, 32);
-    const eyeGeometry = new THREE.SphereGeometry(2.5, 32, 32);
+    };
     const headPosition = new THREE.Vector3(0, 26, 0);
     const bodyPosition = new THREE.Vector3(0, 15, 0);
     const legPosition = new THREE.Vector3(0, 5, 0);
@@ -50,17 +42,52 @@ class MovingCharacter extends React.Component {
     const leftEyePosition = new THREE.Vector3(-2.5, 27, -6);
     const rightEyePosition = new THREE.Vector3(2.5, 27, -6);
     return (
-      <Object3D rotation={this.props.rotation} position={this.props.position}>
-        <Mesh position={headPosition} geometry={headGeometry} material={material} />
-        <Mesh position={bodyPosition} geometry={bodyGeometry} material={material} />
-        <Mesh position={legPosition} geometry={legGeometry} material={material} />
-        <Mesh position={leftEarPosition} geometry={earGeometry} material={material} />
-        <Mesh position={rightEarPosition} geometry={earGeometry} material={material} />
-        <Mesh position={leftInnerEarPosition} geometry={innerEarGeometry} material={innerEarMaterial} />
-        <Mesh position={rightInnerEarPosition} geometry={innerEarGeometry} material={innerEarMaterial} />
-        <Mesh position={leftEyePosition} geometry={eyeGeometry} material={eyeMaterial} />
-        <Mesh position={rightEyePosition} geometry={eyeGeometry} material={eyeMaterial} />
-      </Object3D>
+      <object3D rotation={this.props.rotation} position={this.props.position}>
+        <mesh key={THREE.Math.generateUUID()} position={headPosition}>
+          <sphereGeometry radius={6} widthSegments={32} heightSegments={32} />
+          <meshBasicMaterial color={material.color} />
+        </mesh>
+
+        <mesh key={THREE.Math.generateUUID()} position={bodyPosition}>
+          <cylinderGeometry radiusTop={7} radiusBottom={7} height={10} radialSegments={32} />
+          <meshBasicMaterial color={material.color} />
+        </mesh>
+
+        <mesh key={THREE.Math.generateUUID()} position={legPosition}>
+          <cylinderGeometry radiusTop={4} radiusBottom={4} height={10} radialSegments={32} />
+          <meshBasicMaterial color={material.color} />
+        </mesh>
+
+        <mesh key={THREE.Math.generateUUID()} position={leftEarPosition}>
+          <cylinderGeometry radiusTop={2} radiusBottom={2} height={15} radialSegments={32} />
+          <meshBasicMaterial color={material.color} />
+        </mesh>
+
+        <mesh key={THREE.Math.generateUUID()} position={rightEarPosition}>
+          <cylinderGeometry radiusTop={2} radiusBottom={2} height={10} radialSegments={32} />
+          <meshBasicMaterial color={material.color} />
+        </mesh>
+
+        <mesh key={THREE.Math.generateUUID()} position={leftInnerEarPosition}>
+          <cylinderGeometry radiusTop={1} radiusBottom={1} height={10} radialSegments={32} />
+          <meshBasicMaterial color={innerEarMaterial.color} />
+        </mesh>
+
+        <mesh key={THREE.Math.generateUUID()} position={rightInnerEarPosition}>
+          <cylinderGeometry radiusTop={1} radiusBottom={1} height={10} radialSegments={32} />
+          <meshBasicMaterial color={innerEarMaterial.color} />
+        </mesh>
+
+        <mesh key={THREE.Math.generateUUID()} position={leftEyePosition}>
+          <sphereGeometry radius={2.5} widthSegments={32} heightSegments={32} />
+          <meshBasicMaterial color={eyeMaterial.color} />
+        </mesh>
+
+        <mesh key={THREE.Math.generateUUID()} position={rightEyePosition}>
+          <sphereGeometry radius={2.5} widthSegments={32} heightSegments={32} />
+          <meshBasicMaterial color={eyeMaterial.color} />
+        </mesh>
+      </object3D>
     );
   }
 }
@@ -80,4 +107,4 @@ const Character = connect(
   mapDispatchToProps
 )(MovingCharacter);
 
-export default Character;
+export default storeWrapper(Character);

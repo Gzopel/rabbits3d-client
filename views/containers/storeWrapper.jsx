@@ -1,27 +1,14 @@
 import React from 'react';
-import {  Provider }  from 'react-redux';
+import { Provider }  from 'react-redux';
 
-class StoreWrapper extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <Provider store={this.props.store}>
-        { this.props.children }
-      </Provider>
-    );
-  }
-}
-
-StoreWrapper.propTypes = {
-  children: React.PropTypes.element.isRequired,
-  store: React.PropTypes.object.isRequired,
+export default (Component) => {
+  return class StoreWrapper extends React.Component {
+    render() {
+      return (
+        <Provider store={window.reduxStore}>
+          <Component {...this.props} />
+        </Provider>
+      );
+    }
+  };
 };
-
-StoreWrapper.defaultProps = {
-  store: window.reduxStore,
-};
-
-export default StoreWrapper;

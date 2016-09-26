@@ -2,6 +2,7 @@ import React from 'react';
 import React3 from 'react-three-renderer';
 import { connect } from 'react-redux';
 
+import storeWrapper from './storeWrapper';
 import { cameraRotation } from '../actions/Camera';
 import keyEmitter from '../KeyEventEmitter';
 import KEYS from '../keys';
@@ -54,4 +55,4 @@ const Camera = connect(
   mapStateToProps
 )(MovingCamera);
 
-export default Camera;
+export default storeWrapper(Camera);
