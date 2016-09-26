@@ -5,7 +5,7 @@ const THREE = require('three');
 
 const Map = ({ children, onClick }) => {
   return (
-    <object3D>
+    <object3D rotation={new THREE.Euler(Math.PI / 2, 0, 0)}>
       <axisHelper size={800} />
       <mesh key="map" position={new THREE.Vector3(0, 0, 0)}>
         <planeGeometry
