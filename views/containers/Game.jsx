@@ -106,10 +106,7 @@ class GameComponent extends React.Component {
       <GameScene width={this.props.size.width} height={this.props.size.height}>
         <Map onClick={this.moveCharacterOnClick}>
           <object3D>
-            <Character
-              position={this.props.characterPosition}
-              rotation={this.props.characterRotation}
-            />
+            <Character />
             <Exit x={780} z={0} />
             <Exit x={-780} z={0} />
             <Exit x={0} z={780} />
@@ -131,8 +128,6 @@ class GameComponent extends React.Component {
 
 GameComponent.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
-  characterPosition: React.PropTypes.object.isRequired,
-  characterRotation: React.PropTypes.object,
   size: React.PropTypes.shape({
     width: React.PropTypes.number,
     height: React.PropTypes.number,
