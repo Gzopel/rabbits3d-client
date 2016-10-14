@@ -5,7 +5,7 @@ const THREE = require('three');
 
 const Exit = ({ x, z }) => {
   return (
-    <object3D rotation={new THREE.Euler(Math.PI / 2, 0, 0)}>
+    <object3D>
       <mesh key={THREE.Math.generateUUID()} position={new THREE.Vector3(x, 1, z)}>
         <circleGeometry
           radius={20}
