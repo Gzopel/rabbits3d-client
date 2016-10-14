@@ -7,7 +7,7 @@ const Map = ({ children, onClick }) => {
   return (
     <object3D rotation={new Three.Euler(-Math.PI / 2, 0, 0)}>
       <axisHelper size={800} />
-      <mesh key="map" position={new Three.Vector3(0, 0, 0)}>
+      <mesh key="map" position={new Three.Vector3(0, 0, 0)} onClick={() => { console.info('clicked!')}}>
         <planeGeometry
           width={1600}
           height={1600}

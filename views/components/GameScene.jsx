@@ -1,6 +1,7 @@
 import React from 'react';
 import React3 from 'react-three-renderer';
 import Camera from '../containers/Camera';
+import MouseInput from '../inputs/MouseInput';
 
 const GameScene = ({ width, height, children }) => {
   return (
@@ -13,6 +14,7 @@ const GameScene = ({ width, height, children }) => {
       clearColor={0x000000}
       forceManualRender={false}
     >
+      <module ref="mouseInput" descriptor={MouseInput} />
       <scene>
         <Camera />
         {children}
