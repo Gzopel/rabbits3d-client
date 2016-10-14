@@ -19,25 +19,23 @@ class GameComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      maxFPS: MAX_FPS,
-      timeStep: TIME_STEP,
       clickedPosition: null,
-      loop: null,
+      loop: this.createLoop(MAX_FPS, TIME_STEP),
     };
   }
 
-  onBeginGame = () => {
-    // TODO: Implement
-  };
+  createLoop = (maxFPS, timeStep) => {
+    return MainLoop
+      .setMaxAllowedFPS(maxFPS)
+      .setSimulationTimestep(timeStep)
+      .setUpdate(this.onUpdateGame)
+      .setEnd(this.onEndGame);
+  }
 
   onUpdateGame = (delta) => {
     // TODO: Take delta into account
     keydrown.tick();
     this.props.dispatch(characterMoveToPoint(this.state.clickedPosition));
-  };
-
-  onDraw = () => {
-    this.forceUpdate();
   };
 
   onEndGame = (_, panic) => {
@@ -48,25 +46,13 @@ class GameComponent extends React.Component {
 
   componentDidMount = () => {
     // TODO create a component that handles the loop, game should dispatch an action for it to start/stop looping
-    //const loop = MainLoop
-    //  .setMaxAllowedFPS(this.state.maxFPS)
-    //  .setSimulationTimestep(this.state.timeStep)
-    //  .setBegin(this.onBeginGame)
-    //  .setUpdate(this.onUpdateGame)
-    //  .setDraw(this.onDraw)
-    //  .setEnd(this.onEndGame);
-    //
-    //this.setState({
-    //  loop,
-    //});
-    //
-    //if (this.props.run) {
-    //  loop.start();
-    //}
+    if (this.props.run) {
+      this.state.loop.start();
+    }
   };
 
   componentWillUnmount = () => {
-    //this.state.loop.stop();
+    this.state.loop.stop();
   };
 
   shouldGameRun = (nextProps) => {
@@ -87,13 +73,8 @@ class GameComponent extends React.Component {
     });
   };
 
-  shouldComponentUpdate = () => {
-    // Overrides React Automatic Renders on State Change
-    return true;
-  };
-
   componentWillReceiveProps(nextProps) {
-    //this.shouldGameRun(nextProps);
+    this.shouldGameRun(nextProps);
   }
 
   render() {
