@@ -13,45 +13,43 @@ const InitialState = {
       eyes: 0x000000,
       innerEars: 0xFF44FF,
     },
-    positions: {
-      ears: {
-        left: new Three.Vector3(-3, 32, 0),
-        right: new Three.Vector3(3, 32, 0),
-      },
-      innerEars: {
-        left: new Three.Vector3(-3, 32, -2),
-        right: new Three.Vector3(3, 32, -2),
-      },
-      eyes: {
-        left: new Three.Vector3(-2.5, 27, -6),
-        right: new Three.Vector3(2.5, 27, -6),
-      },
-      head: new Three.Vector3(0, 26, 0),
-      body: new Three.Vector3(0, 15, 0),
-      legs: new Three.Vector3(0, 5, 0),
-    },
-    sizes: {
+    geometries: {
       ears: {
         height: 15,
         radius: 2,
+        position: {
+          left: new Three.Vector3(-3, 32, 0),
+          right: new Three.Vector3(3, 32, 0),
+        },
       },
       innerEars: {
         height: 10,
         radius: 1,
+        position: {
+          left: new Three.Vector3(-3, 32, -2),
+          right: new Three.Vector3(3, 32, -2),
+        },
       },
       eyes: {
         radius: 2.5,
+        position: {
+          left: new Three.Vector3(-2.5, 27, -6),
+          right: new Three.Vector3(2.5, 27, -6),
+        },
       },
       head: {
         radius: 6,
+        position: new Three.Vector3(0, 26, 0),
       },
       body: {
         height: 10,
         radius: 7,
+        position: new Three.Vector3(0, 15, 0),
       },
       legs: {
         height: 10,
         radius: 4,
+        position: new Three.Vector3(0, 5, 0),
       },
     },
   },

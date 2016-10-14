@@ -26,87 +26,87 @@ class MovingCharacter extends React.Component {
     return (
       <object3D rotation={this.props.rotation} position={this.props.position}>
 
-        <mesh name="head" key={THREE.Math.generateUUID()} position={this.props.config.positions.head}>
+        <mesh name="head" key={THREE.Math.generateUUID()} position={this.props.config.geometries.head.position}>
           <sphereGeometry
-            radius={this.props.config.sizes.head.radius}
+            radius={this.props.config.geometries.head.radius}
             widthSegments={this.props.config.segments}
             heightSegments={this.props.config.segments}
           />
           <meshBasicMaterial color={this.props.config.colors.body} />
         </mesh>
 
-        <mesh name="body" key={THREE.Math.generateUUID()} position={this.props.config.positions.body}>
+        <mesh name="body" key={THREE.Math.generateUUID()} position={this.props.config.geometries.body.position}>
           <cylinderGeometry
-            radiusTop={this.props.config.sizes.body.radius}
-            radiusBottom={this.props.config.sizes.body.radius}
-            height={this.props.config.sizes.body.height}
+            radiusTop={this.props.config.geometries.body.radius}
+            radiusBottom={this.props.config.geometries.body.radius}
+            height={this.props.config.geometries.body.height}
             radialSegments={this.props.config.segments}
           />
           <meshBasicMaterial color={this.props.config.colors.body} />
         </mesh>
 
-        <mesh name="legs" key={THREE.Math.generateUUID()} position={this.props.config.positions.legs}>
+        <mesh name="legs" key={THREE.Math.generateUUID()} position={this.props.config.geometries.legs.position}>
           <cylinderGeometry
-            radiusTop={this.props.config.sizes.legs.radius}
-            radiusBottom={this.props.config.sizes.legs.radius}
-            height={this.props.config.sizes.legs.height}
+            radiusTop={this.props.config.geometries.legs.radius}
+            radiusBottom={this.props.config.geometries.legs.radius}
+            height={this.props.config.geometries.legs.height}
             radialSegments={this.props.config.segments}
           />
           <meshBasicMaterial color={this.props.config.colors.body} />
         </mesh>
 
-        <mesh name="left-ear" key={THREE.Math.generateUUID()} position={this.props.config.positions.ears.left}>
+        <mesh name="left-ear" key={THREE.Math.generateUUID()} position={this.props.config.geometries.ears.position.left}>
           <cylinderGeometry
-            radiusTop={this.props.config.sizes.ears.radius}
-            radiusBottom={this.props.config.sizes.ears.radius}
-            height={this.props.config.sizes.ears.height}
+            radiusTop={this.props.config.geometries.ears.radius}
+            radiusBottom={this.props.config.geometries.ears.radius}
+            height={this.props.config.geometries.ears.height}
             radialSegments={this.props.config.segments}
           />
           <meshBasicMaterial color={this.props.config.colors.body} />
         </mesh>
 
-        <mesh name="right-ear" key={THREE.Math.generateUUID()} position={this.props.config.positions.ears.right}>
+        <mesh name="right-ear" key={THREE.Math.generateUUID()} position={this.props.config.geometries.ears.position.right}>
           <cylinderGeometry
-            radiusTop={this.props.config.sizes.ears.radius}
-            radiusBottom={this.props.config.sizes.ears.radius}
-            height={this.props.config.sizes.ears.height}
+            radiusTop={this.props.config.geometries.ears.radius}
+            radiusBottom={this.props.config.geometries.ears.radius}
+            height={this.props.config.geometries.ears.height}
             radialSegments={this.props.config.segments}
           />
           <meshBasicMaterial color={this.props.config.colors.body} />
         </mesh>
 
-        <mesh name="left-inner-ear" key={THREE.Math.generateUUID()} position={this.props.config.positions.innerEars.left}>
+        <mesh name="left-inner-ear" key={THREE.Math.generateUUID()} position={this.props.config.geometries.innerEars.position.left}>
           <cylinderGeometry
-            radiusTop={this.props.config.sizes.innerEars.radius}
-            radiusBottom={this.props.config.sizes.innerEars.radius}
-            height={this.props.config.sizes.innerEars.height}
+            radiusTop={this.props.config.geometries.innerEars.radius}
+            radiusBottom={this.props.config.geometries.innerEars.radius}
+            height={this.props.config.geometries.innerEars.height}
             radialSegments={this.props.config.segments}
           />
           <meshBasicMaterial color={this.props.config.colors.innerEars} />
         </mesh>
 
-        <mesh name="right-inner-ear" key={THREE.Math.generateUUID()} position={this.props.config.positions.innerEars.right}>
+        <mesh name="right-inner-ear" key={THREE.Math.generateUUID()} position={this.props.config.geometries.innerEars.position.right}>
           <cylinderGeometry
-            radiusTop={this.props.config.sizes.innerEars.radius}
-            radiusBottom={this.props.config.sizes.innerEars.radius}
-            height={this.props.config.sizes.innerEars.height}
+            radiusTop={this.props.config.geometries.innerEars.radius}
+            radiusBottom={this.props.config.geometries.innerEars.radius}
+            height={this.props.config.geometries.innerEars.height}
             radialSegments={this.props.config.segments}
           />
           <meshBasicMaterial color={this.props.config.colors.innerEars} />
         </mesh>
 
-        <mesh name="left-eye-position" key={THREE.Math.generateUUID()} position={this.props.config.positions.eyes.left}>
+        <mesh name="left-eye-position" key={THREE.Math.generateUUID()} position={this.props.config.geometries.eyes.position.left}>
           <sphereGeometry
-            radius={this.props.config.sizes.eyes.radius}
+            radius={this.props.config.geometries.eyes.radius}
             widthSegments={this.props.config.segments}
             heightSegments={this.props.config.segments}
           />
           <meshBasicMaterial color={this.props.config.colors.eyes} />
         </mesh>
 
-        <mesh name="right-eye-position" key={THREE.Math.generateUUID()} position={this.props.config.positions.eyes.right}>
+        <mesh name="right-eye-position" key={THREE.Math.generateUUID()} position={this.props.config.geometries.eyes.position.right}>
           <sphereGeometry
-            radius={this.props.config.sizes.eyes.radius}
+            radius={this.props.config.geometries.eyes.radius}
             widthSegments={this.props.config.segments}
             heightSegments={this.props.config.segments}
           />
