@@ -14,8 +14,6 @@ const FPS = 60;
 const TIME_STEP = 1000 / FPS;
 const MAX_FPS = 60;
 
-const Three = require('three');
-
 class GameComponent extends React.Component {
   constructor(props) {
     super(props);

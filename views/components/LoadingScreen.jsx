@@ -1,16 +1,16 @@
 import React from 'react';
+import React3 from 'react-three-renderer';
+
 import GameScene from '../components/GameScene';
 
-//const ReactTHREE = require('react-three');
 const THREE = require('three');
 
-const Mesh = ReactTHREE.Mesh;
-
 class LoadingScreen extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.font = null;
   }
+
   componentWillMount() {
     this.loadFont();
   }
@@ -19,7 +19,14 @@ class LoadingScreen extends React.Component {
   loadFont() {
     const loader = new THREE.XHRLoader(THREE.DefaultLoadingManager);
     loader.load('fonts/helvetiker_regular.typeface.json', (font) => {
-      this.font = new THREE.Font(JSON.parse(font));
+      try {
+        this.font = new THREE.Font(
+          JSON.parse(font)
+        );
+      } catch (error) {
+        console.log(error);
+      }
+
       this.forceUpdate();
     });
   }
@@ -29,22 +36,23 @@ class LoadingScreen extends React.Component {
       return false;
     }
 
-    const geometry = new THREE.TextGeometry('Loading...', {
+    const loadingTextStyle = {
       font: this.font,
       size: 20,
       height: 10,
       curveSegments: 2,
-    });
-    geometry.rotateY(Math.PI);
-    const material = new THREE.MultiMaterial([
-      new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff, overdraw: 0.5 }),
-      new THREE.MeshBasicMaterial({ color: 0x000000, overdraw: 0.5 }),
-    ]);
-    const position = new THREE.Vector3(50, 0, 0);
+    };
+
     return (
       <GameScene width={this.props.size.width} height={this.props.size.height}>
-        <Mesh position={position} geometry={geometry} material={material} />
-      </GameScene>);
+        <object3D rotation={new THREE.Euler(0, Math.PI, 0)}>
+          <mesh position={new THREE.Vector3(-50, 0, 0)}>
+            <textGeometry text="Loading..." {...loadingTextStyle} />
+            <meshBasicMaterial color={Math.random() * 0xffffff} side={THREE.DoubleSide} />
+          </mesh>
+        </object3D>
+      </GameScene>
+    );
   }
 }
 

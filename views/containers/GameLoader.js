@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Game from '../containers/Game';
-//import LoadingScreen from '../components/LoadingScreen';
+import LoadingScreen from '../components/LoadingScreen';
 import * as BrowserActions from '../actions/Browser';
 
 class GameLoaderComponent extends React.Component {
@@ -32,9 +32,9 @@ class GameLoaderComponent extends React.Component {
   }
 
   render() {
-    //if (!this.didLoad) {
-    //  return <LoadingScreen size={this.props.size} />;
-    //}
+    if (!this.didLoad) {
+      return <LoadingScreen size={this.props.size} />;
+    }
     return <Game size={this.props.size} />;
   }
 }

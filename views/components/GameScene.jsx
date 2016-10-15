@@ -5,7 +5,6 @@ import Camera from '../containers/Camera';
 import { setSceneReference, setMouseInputReference } from '../actions/References';
 import MouseInput from '../inputs/MouseInput';
 
-
 class GameScene extends React.Component {
   componentDidMount = () => {
     this.props.dispatch(setSceneReference(this.scene));
