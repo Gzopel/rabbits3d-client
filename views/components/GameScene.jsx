@@ -2,7 +2,7 @@ import React from 'react';
 import React3 from 'react-three-renderer';
 import { connect } from 'react-redux';
 import Camera from '../containers/Camera';
-import { setSceneReference, setMouseInputReference, setContainerReference } from '../actions/References';
+import { setSceneReference, setMouseInputReference } from '../actions/References';
 import MouseInput from '../inputs/MouseInput';
 
 

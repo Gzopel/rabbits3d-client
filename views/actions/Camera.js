@@ -1,7 +1,7 @@
 import ACTIONS from '../actions';
 import KEYS from '../keys';
 
-import { nextCameraPositionToPoint, translateToPointInCamera, nextPositionToPointToLookAt } from '../helpers/Movement';
+import { nextCameraPositionToPoint, nextPositionToPoint } from '../helpers/Movement';
 
 
 const mapCharToDirection = (key) => {
@@ -39,9 +39,9 @@ export const cameraMoveToPointSuccess = cameraNextPosition => ({
 export const cameraMoveToPoint = point => (dispatch, getState) => {
   const { Character, Camera } = getState();
 
-  const characterPositionTranslated = translateToPointInCamera(Character.characterPosition);
+  const characterPositionTranslated = Character.characterPosition;
   const cameraNextPosition = {
-    lookAt: nextPositionToPointToLookAt(Camera.cameraConfig.lookAt, point, Character.config.speed),
+    lookAt: nextPositionToPoint(Camera.cameraConfig.lookAt, point, Character.config.speed),
     position: nextCameraPositionToPoint(
       Camera.cameraConfig.position, characterPositionTranslated, point, Character.config.speed
     ),

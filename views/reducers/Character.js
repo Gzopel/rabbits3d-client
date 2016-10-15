@@ -4,7 +4,7 @@ const Three = require('three');
 
 const InitialState = {
   characterPosition: new Three.Vector3(0, 0, 0),
-  characterRotation: new Three.Euler(Math.PI / 2, 0, 0, 'XYZ'),
+  characterRotation: new Three.Euler(0, 0, 0, 'XYZ'),
   config: {
     speed: 20,
     segments: 32,

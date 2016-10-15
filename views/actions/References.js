@@ -14,8 +14,3 @@ export const setMouseInputReference = mouseInputReference => ({
   type: ACTIONS.REFERENCES.SET_MOUSE_INPUT_REFERENCE,
   reference: mouseInputReference,
 });
-
-export const setContainerReference = containerReference => ({
-  type: ACTIONS.REFERENCES.SET_CONTAINER_REFERENCE,
-  reference: containerReference,
-});

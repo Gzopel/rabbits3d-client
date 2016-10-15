@@ -8,7 +8,6 @@ import GameScene from '../components/GameScene';
 import Map from '../components/Map';
 import Tree from '../components/Tree';
 import Character from '../containers/Character';
-import Exit from '../components/Exit';
 import { characterMoveToPoint } from '../actions/Character';
 
 const FPS = 60;
@@ -21,7 +20,6 @@ class GameComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      clickedPosition: null,
       loop: this.createLoop(MAX_FPS, TIME_STEP),
     };
   }
@@ -72,7 +70,6 @@ class GameComponent extends React.Component {
     if (event.preventDefault) {
       event.preventDefault();
     }
-    console.debug(intersection.point);
     this.props.dispatch(characterMoveToPoint(intersection.point));
   };
 
@@ -87,10 +84,6 @@ class GameComponent extends React.Component {
         <Map onClick={this.moveCharacterOnClick}>
           <object3D>
             <Character />
-            <Exit x={780} z={1} />
-            <Exit x={-780} z={1} />
-            <Exit x={0} z={780} />
-            <Exit x={0} z={-780} />
             <Tree x={300} z={300} />
             <Tree x={780} z={200} />
             <Tree x={200} z={780} />

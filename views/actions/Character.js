@@ -1,5 +1,5 @@
 import ACTIONS from '../actions';
-import { nextPositionToPoint, translateToPointInMap, rotateToNextPosition } from '../helpers/Movement.js';
+import { nextPositionToPoint, rotateToNextPosition } from '../helpers/Movement.js';
 import { cameraMoveToPoint } from './Camera';
 
 export const characterMoveToPointSuccess = (characterNextPosition, characterRotation) => ({
@@ -17,7 +17,7 @@ export const characterMoveToPoint = point => (dispatch, getState) => {
 
   const characterPreviousPosition = Character.characterPosition;
   const characterNextPosition = nextPositionToPoint(
-    characterPreviousPosition, translateToPointInMap(point), Character.config.speed
+    characterPreviousPosition, point, Character.config.speed
   );
 
   const characterPreviousRotation = Character.characterRotation;

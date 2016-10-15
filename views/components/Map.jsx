@@ -5,20 +5,22 @@ const Three = require('three');
 
 const Map = ({ children, onClick }) => {
   return (
-    <object3D rotation={new Three.Euler(-Math.PI / 2, 0, 0)}>
+    <object3D>
       <axisHelper size={800} />
-      <mesh key="map" position={new Three.Vector3(0, 0, 0)} onClick={onClick}>
-        <planeGeometry
-          width={1600}
-          height={1600}
-          widthSegments={1}
-          heightSegments={1}
-        />
-        <meshBasicMaterial
-          color={0x00ff00}
-          side={Three.DoubleSide}
-        />
-      </mesh>
+      <object3D rotation={new Three.Euler(-Math.PI / 2, 0, 0)}>
+        <mesh key="map" position={new Three.Vector3(0, 0, 0)} onClick={onClick}>
+          <planeGeometry
+            width={1600}
+            height={1600}
+            widthSegments={1}
+            heightSegments={1}
+          />
+          <meshBasicMaterial
+            color={0x00ff00}
+            side={Three.DoubleSide}
+          />
+        </mesh>
+      </object3D>
       { children }
     </object3D>
   );

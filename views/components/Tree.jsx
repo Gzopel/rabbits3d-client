@@ -5,7 +5,7 @@ const THREE = require('three');
 
 const Tree = ({ x, z }) => {
   return (
-    <object3D rotation={new THREE.Euler(Math.PI / 2, 0, 0, 'XYZ')}>
+    <object3D>
       <mesh key={THREE.Math.generateUUID()} position={new THREE.Vector3(x, 45, z)}>
         <sphereGeometry radius={20} widthSegments={32} heightSegments={32} />
         <meshBasicMaterial color={0x004f00} />
@@ -17,7 +17,7 @@ const Tree = ({ x, z }) => {
       </mesh>
     </object3D>
   );
-}
+};
 
 Tree.propTypes = {
   x: React.PropTypes.number.isRequired,

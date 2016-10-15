@@ -20,6 +20,7 @@ class MovingCharacter extends React.Component {
 
   onKeyPressed = (event) => {
     // TODO actions Q,W,E,R,T items 1,2,3,4,5
+    //this.props.dispatch(cameraRotation(event));
   };
 
   render() {
