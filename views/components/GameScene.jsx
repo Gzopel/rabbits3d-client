@@ -35,7 +35,7 @@ class GameScene extends React.Component {
           height={this.props.height}
           antialias
           shadowMapEnabled={true}
-          clearColor={0x000000}
+          clearColor={0x73addb}
           forceManualRender={false}
           onAnimate={this.onAnimate}
         >

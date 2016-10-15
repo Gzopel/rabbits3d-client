@@ -11,7 +11,7 @@ const InitialState = {
     colors: {
       body: 0xffffff,
       eyes: 0x000000,
-      innerEars: 0xFF44FF,
+      innerEars: 0xffb9c4,
     },
     geometries: {
       ears: {

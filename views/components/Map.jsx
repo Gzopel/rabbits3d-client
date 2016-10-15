@@ -16,7 +16,7 @@ const Map = ({ children, onClick }) => {
             heightSegments={1}
           />
           <meshBasicMaterial
-            color={0x00ff00}
+            color={0x8bd838}
             side={Three.DoubleSide}
           />
         </mesh>
