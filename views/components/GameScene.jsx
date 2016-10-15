@@ -1,26 +1,67 @@
 import React from 'react';
+import React3 from 'react-three-renderer';
+import { connect } from 'react-redux';
 import Camera from '../containers/Camera';
+import { setSceneReference, setMouseInputReference } from '../actions/References';
+import MouseInput from '../inputs/MouseInput';
 
-const ReactTHREE = require('react-three');
+class GameScene extends React.Component {
+  componentDidMount = () => {
+    this.props.dispatch(setSceneReference(this.scene));
+    this.props.dispatch(setMouseInputReference(this.mouseInput));
+  }
 
-const Renderer = ReactTHREE.Renderer;
-const Scene = ReactTHREE.Scene;
+  onAnimate = () => {
+    if (this.props.elements.scene && this.props.elements.camera) {
+      this.setMouseInput();
+    }
+  }
 
-const GameScene = ({ width, height, children }) => {
-  return (
-    <Renderer width={width} height={height}>
-      <Scene width={width} height={height} camera="maincamera" pointerEvents={['onClick']} >
-        <Camera />
-        {children}
-      </Scene>
-    </Renderer>
-  );
-};
+  setMouseInput = () => {
+    if (!this.props.elements.mouseInput.isReady()) {
+      this.props.elements.mouseInput.ready(
+        this.props.elements.scene, this.container, this.props.elements.camera
+      );
+      this.props.elements.mouseInput.setActive(false);
+    }
+  }
+
+  render() {
+    return (
+      <div ref={e => this.container = e}>
+        <React3
+          mainCamera="maincamera"
+          width={this.props.width}
+          height={this.props.height}
+          antialias
+          shadowMapEnabled={true}
+          clearColor={0x73addb}
+          forceManualRender={false}
+          onAnimate={this.onAnimate}
+        >
+          <module ref={c => this.mouseInput = c} descriptor={MouseInput} />
+          <scene ref={c => this.scene = c}>
+            <Camera />
+            {this.props.children}
+          </scene>
+        </React3>
+      </div>
+    );
+  }
+}
 
 GameScene.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
   width: React.PropTypes.number.isRequired,
   height: React.PropTypes.number.isRequired,
   children: React.PropTypes.element.isRequired,
+  elements: React.PropTypes.object.isRequired,
 };
 
-export default GameScene;
+const mapStateToProps = state => ({
+  elements: state.References.elements,
+});
+
+export default connect(
+  mapStateToProps
+)(GameScene);

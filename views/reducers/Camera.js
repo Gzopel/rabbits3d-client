@@ -1,5 +1,5 @@
 import ACTIONS from '../actions';
-import { nextPosition, nextPositionToPoint, nextCameraPositionToPoint } from './Movement.js';
+import { nextPosition } from '../helpers/Movement.js';
 
 const Three = require('three');
 
@@ -9,33 +9,33 @@ const InitialState = {
     near: 1,
     far: 800,
     position: new Three.Vector3(0, 50, -200),
-    lookat: new Three.Vector3(0, 0, 0),
+    lookAt: new Three.Vector3(0, 0, 0),
   },
 };
 
 const Camera = (state = InitialState, action) => {
   switch (action.type) {
-    case ACTIONS.CAMERA.ROTATE:
+    case ACTIONS.CAMERA.ROTATE_CAMERA:
       if (action.direction === ACTIONS.RESET) {
         return {
           cameraConfig: {
             ...state.cameraConfig,
-            lookat: action.characterPosition,
+            lookAt: action.characterPosition,
           },
         };
       }
       return {
         cameraConfig: {
           ...state.cameraConfig,
-          lookat: nextPosition(state.cameraConfig.lookat, action),
+          lookAt: nextPosition(state.cameraConfig.lookAt, action),
         },
       };
-    case ACTIONS.CHARACTER.WALK:
+    case ACTIONS.CAMERA.MOVE_CAMERA:
       return {
         cameraConfig: {
           ...state.cameraConfig,
-          lookat: nextPositionToPoint(state.cameraConfig.lookat, action),
-          position: nextCameraPositionToPoint(state.cameraConfig.position, action),
+          lookAt: action.cameraNextPosition.lookAt,
+          position: action.cameraNextPosition.position,
         },
       };
     default:

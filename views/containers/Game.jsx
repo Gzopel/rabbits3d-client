@@ -1,18 +1,14 @@
 import React from 'react';
+import React3 from 'react-three-renderer';
 import { connect } from 'react-redux';
 import keydrown from 'keydrown';
 import MainLoop from 'mainloop.js';
+
 import GameScene from '../components/GameScene';
 import Map from '../components/Map';
 import Tree from '../components/Tree';
 import Character from '../containers/Character';
-import Exit from '../components/Exit';
 import { characterMoveToPoint } from '../actions/Character';
-
-
-const ReactTHREE = require('react-three');
-
-const Object3D = ReactTHREE.Object3D;
 
 const FPS = 60;
 const TIME_STEP = 1000 / FPS;
@@ -22,25 +18,28 @@ class GameComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      maxFPS: MAX_FPS,
-      timeStep: TIME_STEP,
-      clickedPosition: null,
-      loop: null,
+      loop: this.createLoop(MAX_FPS, TIME_STEP),
     };
   }
 
-  onBeginGame = () => {
-    // TODO: Implement
+  componentDidMount = () => {
+    // TODO create a component that handles the loop,
+    // game should dispatch an action for it to start/stop looping
+    if (this.props.run) {
+      this.state.loop.start();
+    }
   };
 
-  onUpdateGame = (delta) => {
-    // TODO: Take delta into account
+  componentWillReceiveProps(nextProps) {
+    this.shouldGameRun(nextProps);
+  }
+
+  componentWillUnmount = () => {
+    this.state.loop.stop();
+  };
+
+  onUpdateGame = () => {
     keydrown.tick();
-    this.props.dispatch(characterMoveToPoint(this.state.clickedPosition));
-  };
-
-  onDraw = () => {
-    this.forceUpdate();
   };
 
   onEndGame = (_, panic) => {
@@ -49,28 +48,13 @@ class GameComponent extends React.Component {
     }
   };
 
-  componentDidMount = () => {
-    // TODO create a component that handles the loop, game should dispatch an action for it to start/stop looping
-    const loop = MainLoop
-      .setMaxAllowedFPS(this.state.maxFPS)
-      .setSimulationTimestep(this.state.timeStep)
-      .setBegin(this.onBeginGame)
+  createLoop = (maxFPS, timeStep) => {
+    return MainLoop
+      .setMaxAllowedFPS(maxFPS)
+      .setSimulationTimestep(timeStep)
       .setUpdate(this.onUpdateGame)
-      .setDraw(this.onDraw)
       .setEnd(this.onEndGame);
-
-    this.setState({
-      loop,
-    });
-
-    if (this.props.run) {
-      loop.start();
-    }
-  };
-
-  componentWillUnmount = () => {
-    this.state.loop.stop();
-  };
+  }
 
   shouldGameRun = (nextProps) => {
     if (nextProps.run) {
@@ -84,20 +68,8 @@ class GameComponent extends React.Component {
     if (event.preventDefault) {
       event.preventDefault();
     }
-
-    this.setState({
-      clickedPosition: intersection.point,
-    });
+    this.props.dispatch(characterMoveToPoint(intersection.point));
   };
-
-  shouldComponentUpdate = () => {
-    // Overrides React Automatic Renders on State Change
-    return false;
-  };
-
-  componentWillReceiveProps(nextProps) {
-    this.shouldGameRun(nextProps);
-  }
 
   render() {
     if (!this.props.size.width || !this.props.size.height) {
@@ -107,16 +79,9 @@ class GameComponent extends React.Component {
     // TODO: create a factory of children elements based on a map config
     return (
       <GameScene width={this.props.size.width} height={this.props.size.height}>
-        <Map onClick={this.moveCharacterOnClick} >
-          <Object3D>
-            <Character
-              position={this.props.characterPosition}
-              rotation={this.props.characterRotation}
-            />
-            <Exit x={780} z={0} />
-            <Exit x={-780} z={0} />
-            <Exit x={0} z={780} />
-            <Exit x={0} z={-780} />
+        <Map onClick={this.moveCharacterOnClick}>
+          <object3D>
+            <Character />
             <Tree x={300} z={300} />
             <Tree x={780} z={200} />
             <Tree x={200} z={780} />
@@ -125,7 +90,7 @@ class GameComponent extends React.Component {
             <Tree x={378} z={200} />
             <Tree x={200} z={378} />
             <Tree x={378} z={378} />
-          </Object3D>
+          </object3D>
         </Map>
       </GameScene>
     );
@@ -134,8 +99,6 @@ class GameComponent extends React.Component {
 
 GameComponent.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
-  characterPosition: React.PropTypes.object.isRequired,
-  characterRotation: React.PropTypes.object,
   size: React.PropTypes.shape({
     width: React.PropTypes.number,
     height: React.PropTypes.number,
@@ -152,12 +115,8 @@ const mapStateToProps = state => ({
   characterRotation: state.Character.characterRotation,
 });
 
-const mapDispatchToProps = dispatch => ({
-  dispatch: dispatch,
-});
-
 const Game = connect(
-  mapStateToProps,
-  mapDispatchToProps)(GameComponent);
+  mapStateToProps
+)(GameComponent);
 
 export default Game;

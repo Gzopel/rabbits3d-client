@@ -31,10 +31,10 @@
     "react-dom": "15.3.1",
     "react-redux": "4.4.5",
     "react-router": "2.7.0",
-    "react-three": "0.9.4",
+    "react-three-renderer": "2.3.2",
     "redux": "3.6.0",
     "redux-thunk": "2.1.0",
-    "three": "0.74.0",
+    "three": "0.79.0",
     "webpack": "1.13.2",
     "winston": "2.2.0"
   },
