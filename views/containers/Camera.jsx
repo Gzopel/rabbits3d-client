@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import storeWrapper from './storeWrapper';
 import { cameraRotation } from '../actions/Camera';
+import { setCameraReference } from '../actions/References';
 import keyEmitter from '../KeyEventEmitter';
 import KEYS from '../keys';
 
@@ -12,6 +13,7 @@ const keys = [KEYS.J, KEYS.K, KEYS.L, KEYS.I, KEYS.ENTER];
 class MovingCamera extends React.Component {
   componentDidMount = () => {
     keyEmitter.on(keys, this.onKeyPressed);
+    this.props.dispatch(setCameraReference(this.camera));
   };
 
   componentWillUnmount = () => {
@@ -29,7 +31,7 @@ class MovingCamera extends React.Component {
     };
 
     return (
-      <perspectiveCamera name="maincamera" {...cameraConfig} />
+      <perspectiveCamera ref={c => this.camera = c} name="maincamera" {...cameraConfig} />
     );
   }
 }
@@ -46,7 +48,7 @@ MovingCamera.propTypes = {
   aspect: React.PropTypes.number.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   config: state.Camera.cameraConfig,
   aspect: state.Browser.size.width / state.Browser.size.height,
 });
