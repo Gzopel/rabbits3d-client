@@ -1,7 +1,7 @@
 import ACTIONS from '../actions';
 import KEYS from '../keys';
 
-import { nextCameraPositionToPoint, translateToPointInCamera, nextPositionToPointToLookAt } from '../helpers/Movement.js';
+import { nextCameraPositionToPoint, translateToPointInCamera, nextPositionToPointToLookAt } from '../helpers/Movement';
 
 
 const mapCharToDirection = (key) => {

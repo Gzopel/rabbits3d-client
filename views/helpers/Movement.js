@@ -56,4 +56,18 @@ export const nextCameraPositionToPoint = (position, characterPosition, point, sp
   return vector.add(position);
 }
 
+export const rotateToNextPosition = (previousPosition, newPosition, previousRotation) => {
+  // TODO: Fix this!
+  //const fromV = new Three.Vector3(0, 1, 0);
+  //const toV = previousPosition.clone().sub(newPosition).normalize();
+  //toV.set(-toV.z, 0, toV.x);
+  ///*
+  // * OK, so this works, but its a hack. We are doing something wrong here but what?
+  // * */
+  //return previousRotation.setFromQuaternion(
+  //  new Three.Quaternion().setFromUnitVectors(fromV, toV).normalize()
+  //, 'XYZ');
+  return previousRotation;
+}
+
 export default nextPositionToPoint;

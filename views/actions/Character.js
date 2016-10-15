@@ -1,10 +1,11 @@
 import ACTIONS from '../actions';
-import { nextPositionToPoint, translateToPointInMap } from '../helpers/Movement.js';
+import { nextPositionToPoint, translateToPointInMap, rotateToNextPosition } from '../helpers/Movement.js';
 import { cameraMoveToPoint } from './Camera';
 
-export const characterMoveToPointSuccess = characterNextPosition => ({
+export const characterMoveToPointSuccess = (characterNextPosition, characterRotation) => ({
   type: ACTIONS.CHARACTER.WALK,
   characterNextPosition: characterNextPosition,
+  characterRotation: characterRotation,
 });
 
 export const characterMoveToPoint = point => (dispatch, getState) => {
@@ -19,10 +20,15 @@ export const characterMoveToPoint = point => (dispatch, getState) => {
     characterPreviousPosition, translateToPointInMap(point), Character.config.speed
   );
 
+  const characterPreviousRotation = Character.characterRotation;
+  const characterRotation = rotateToNextPosition(
+    characterPreviousPosition, characterNextPosition, characterPreviousRotation
+  );
+
   const hasCharacterMoved = !Character.characterPosition.equals(characterNextPosition);
 
   if (hasCharacterMoved) {
-    dispatch(characterMoveToPointSuccess(characterNextPosition));
+    dispatch(characterMoveToPointSuccess(characterNextPosition, characterRotation));
     dispatch(cameraMoveToPoint(point));
   }
 };

@@ -58,17 +58,9 @@ const InitialState = {
 const Character = (state = InitialState, action) => {
   switch (action.type) {
     case ACTIONS.CHARACTER.WALK:
-      //const fromV = new Three.Vector3(-1, 0, 0);
-      //const toV = state.characterPosition.clone().sub(nextPosition).normalize();
-      //toV.set(-toV.z, 0, toV.x);
-      /*
-      * OK, so this works, but its a hack. We are doing something wrong here but what?
-      * */
-      //const rotation = new Three.Euler().setFromQuaternion(
-      //  new Three.Quaternion().setFromUnitVectors(fromV, toV).normalize(), 'XYZ');
       return {
         characterPosition: action.characterNextPosition,
-        characterRotation: state.characterRotation,
+        characterRotation: action.characterRotation,
         config: state.config,
       };
     default:

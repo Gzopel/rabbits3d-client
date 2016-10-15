@@ -1,5 +1,5 @@
 import ACTIONS from '../actions';
-import { nextPosition } from './Movement.js';
+import { nextPosition } from '../helpers/Movement.js';
 
 const Three = require('three');
 
