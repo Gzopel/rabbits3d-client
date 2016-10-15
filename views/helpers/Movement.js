@@ -2,22 +2,22 @@ import ACTIONS from '../actions';
 
 const Three = require('three');
 
-//export const nextPosition = (position, action) => {
-//  // TODO: Add factory for Three Objects
-//  const speed = action.speed || 1;
-//  switch (action.direction) {
-//    case ACTIONS.MOVE.FOWARD:
-//      return new Three.Vector3(0, 1 * speed, 0).add(position);
-//    case ACTIONS.MOVE.BACK:
-//      return new Three.Vector3(0,  -1 * speed, 0).add(position);
-//    case ACTIONS.MOVE.LEFT:
-//      return new Three.Vector3(1 * speed, 0, 0).add(position);
-//    case ACTIONS.MOVE.RIGHT:
-//      return new Three.Vector3(-1 * speed, 0, 0).add(position);
-//    default:
-//      return position;
-//  }
-//};
+export const nextPosition = (position, action) => {
+  // TODO: Add factory for Three Objects
+  const speed = action.speed || 1;
+  switch (action.direction) {
+    case ACTIONS.MOVE.FOWARD:
+      return new Three.Vector3(0, 1 * speed, 0).add(position);
+    case ACTIONS.MOVE.BACK:
+      return new Three.Vector3(0,  -1 * speed, 0).add(position);
+    case ACTIONS.MOVE.LEFT:
+      return new Three.Vector3(1 * speed, 0, 0).add(position);
+    case ACTIONS.MOVE.RIGHT:
+      return new Three.Vector3(-1 * speed, 0, 0).add(position);
+    default:
+      return position;
+  }
+}
 
 export const translateToPointInMap = (point) => {
   const angle = new Three.Vector3(1, 0, 0);
@@ -26,8 +26,7 @@ export const translateToPointInMap = (point) => {
 
 export const translateToPointInCamera = (point) => {
   const angle = new Three.Vector3(1, 0, 0);
-  const newPoint = point.clone().applyAxisAngle(angle, -Math.PI / 2);
-  return newPoint;
+  return point.clone().applyAxisAngle(angle, -Math.PI / 2);
 }
 
 // TODO: the math in here could use some love.
@@ -54,8 +53,7 @@ export const nextCameraPositionToPoint = (position, characterPosition, point, sp
   vector.normalize();
   vector.setY(0);
   vector.multiplyScalar(speed);
-  const newPosition = vector.add(position);
-  return newPosition;
+  return vector.add(position);
 }
 
 export default nextPositionToPoint;

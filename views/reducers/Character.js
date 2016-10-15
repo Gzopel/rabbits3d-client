@@ -6,7 +6,7 @@ const InitialState = {
   characterPosition: new Three.Vector3(0, 0, 0),
   characterRotation: new Three.Euler(Math.PI / 2, 0, 0, 'XYZ'),
   config: {
-    speed: 10,
+    speed: 20,
     segments: 32,
     colors: {
       body: 0xffffff,

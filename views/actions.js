@@ -8,7 +8,8 @@ const ACTIONS = {
     RIGHT: 'RIGHT',
   },
   CAMERA: {
-    ROTATE: 'ROTATE',
+    ROTATE_CAMERA: 'ROTATE_CAMERA',
+    MOVE_CAMERA: 'MOVE_CAMERA',
   },
   CHARACTER: {
     WALK: 'WALK',

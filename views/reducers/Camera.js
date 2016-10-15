@@ -15,7 +15,7 @@ const InitialState = {
 
 const Camera = (state = InitialState, action) => {
   switch (action.type) {
-    case ACTIONS.CAMERA.ROTATE:
+    case ACTIONS.CAMERA.ROTATE_CAMERA:
       if (action.direction === ACTIONS.RESET) {
         return {
           cameraConfig: {
@@ -30,7 +30,7 @@ const Camera = (state = InitialState, action) => {
           lookAt: nextPosition(state.cameraConfig.lookAt, action),
         },
       };
-    case ACTIONS.CHARACTER.WALK:
+    case ACTIONS.CAMERA.MOVE_CAMERA:
       return {
         cameraConfig: {
           ...state.cameraConfig,
