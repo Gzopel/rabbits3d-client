@@ -15,6 +15,8 @@ const FPS = 60;
 const TIME_STEP = 1000 / FPS;
 const MAX_FPS = 60;
 
+const Three = require('three');
+
 class GameComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -24,18 +26,24 @@ class GameComponent extends React.Component {
     };
   }
 
-  createLoop = (maxFPS, timeStep) => {
-    return MainLoop
-      .setMaxAllowedFPS(maxFPS)
-      .setSimulationTimestep(timeStep)
-      .setUpdate(this.onUpdateGame)
-      .setEnd(this.onEndGame);
+  componentDidMount = () => {
+    // TODO create a component that handles the loop,
+    // game should dispatch an action for it to start/stop looping
+    if (this.props.run) {
+      this.state.loop.start();
+    }
+  };
+
+  componentWillReceiveProps(nextProps) {
+    this.shouldGameRun(nextProps);
   }
 
-  onUpdateGame = (delta) => {
-    // TODO: Take delta into account
+  componentWillUnmount = () => {
+    this.state.loop.stop();
+  };
+
+  onUpdateGame = () => {
     keydrown.tick();
-    this.props.dispatch(characterMoveToPoint(this.state.clickedPosition));
   };
 
   onEndGame = (_, panic) => {
@@ -44,16 +52,13 @@ class GameComponent extends React.Component {
     }
   };
 
-  componentDidMount = () => {
-    // TODO create a component that handles the loop, game should dispatch an action for it to start/stop looping
-    if (this.props.run) {
-      this.state.loop.start();
-    }
-  };
-
-  componentWillUnmount = () => {
-    this.state.loop.stop();
-  };
+  createLoop = (maxFPS, timeStep) => {
+    return MainLoop
+      .setMaxAllowedFPS(maxFPS)
+      .setSimulationTimestep(timeStep)
+      .setUpdate(this.onUpdateGame)
+      .setEnd(this.onEndGame);
+  }
 
   shouldGameRun = (nextProps) => {
     if (nextProps.run) {
@@ -67,15 +72,9 @@ class GameComponent extends React.Component {
     if (event.preventDefault) {
       event.preventDefault();
     }
-
-    this.setState({
-      clickedPosition: intersection.point,
-    });
+    console.debug(intersection.point);
+    this.props.dispatch(characterMoveToPoint(intersection.point));
   };
-
-  componentWillReceiveProps(nextProps) {
-    this.shouldGameRun(nextProps);
-  }
 
   render() {
     if (!this.props.size.width || !this.props.size.height) {
@@ -88,8 +87,8 @@ class GameComponent extends React.Component {
         <Map onClick={this.moveCharacterOnClick}>
           <object3D>
             <Character />
-            <Exit x={780} z={0} />
-            <Exit x={-780} z={0} />
+            <Exit x={780} z={1} />
+            <Exit x={-780} z={1} />
             <Exit x={0} z={780} />
             <Exit x={0} z={-780} />
             <Tree x={300} z={300} />

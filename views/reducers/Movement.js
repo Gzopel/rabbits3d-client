@@ -7,9 +7,9 @@ export const nextPosition = (position, action) => {
   const speed = action.speed || 1;
   switch (action.direction) {
     case ACTIONS.MOVE.FOWARD:
-      return new Three.Vector3(0, 0, 1 * speed).add(position);
+      return new Three.Vector3(0, 1 * speed, 0).add(position);
     case ACTIONS.MOVE.BACK:
-      return new Three.Vector3(0, 0, -1 * speed).add(position);
+      return new Three.Vector3(0,  -1 * speed, 0).add(position);
     case ACTIONS.MOVE.LEFT:
       return new Three.Vector3(1 * speed, 0, 0).add(position);
     case ACTIONS.MOVE.RIGHT:
@@ -19,13 +19,12 @@ export const nextPosition = (position, action) => {
   }
 };
 
-
 // TODO: the math in here could use some love.
 export const nextPositionToPoint = (position, action) => {
   const speed = action.speed || 1;
   const vector = action.point.clone().sub(position);
   vector.normalize();
-  vector.setY(0);
+  vector.setZ(0);
   vector.multiplyScalar(speed);
   const newPosition = vector.add(position);
   return newPosition.distanceTo(position) < action.point.distanceTo(position) ?

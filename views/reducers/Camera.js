@@ -1,5 +1,5 @@
 import ACTIONS from '../actions';
-import { nextPosition, nextPositionToPoint, nextCameraPositionToPoint } from './Movement.js';
+import { nextPosition } from './Movement.js';
 
 const Three = require('three');
 
@@ -34,8 +34,8 @@ const Camera = (state = InitialState, action) => {
       return {
         cameraConfig: {
           ...state.cameraConfig,
-          lookAt: nextPositionToPoint(state.cameraConfig.lookAt, action),
-          position: nextCameraPositionToPoint(state.cameraConfig.position, action),
+          lookAt: action.cameraNextPosition.lookAt,
+          position: action.cameraNextPosition.position,
         },
       };
     default:

@@ -1,5 +1,4 @@
 import ACTIONS from '../actions';
-import { nextPositionToPoint } from './Movement.js';
 
 const Three = require('three');
 
@@ -7,6 +6,7 @@ const InitialState = {
   characterPosition: new Three.Vector3(0, 0, 0),
   characterRotation: new Three.Euler(Math.PI / 2, 0, 0, 'XYZ'),
   config: {
+    speed: 10,
     segments: 32,
     colors: {
       body: 0xffffff,
@@ -58,18 +58,18 @@ const InitialState = {
 const Character = (state = InitialState, action) => {
   switch (action.type) {
     case ACTIONS.CHARACTER.WALK:
-      const nextPosition = nextPositionToPoint(state.characterPosition, action);
-      const fromV = new Three.Vector3(-1, 0, 0);
-      const toV = state.characterPosition.clone().sub(nextPosition).normalize();
-      toV.set(-toV.z, 0, toV.x);
+      //const fromV = new Three.Vector3(-1, 0, 0);
+      //const toV = state.characterPosition.clone().sub(nextPosition).normalize();
+      //toV.set(-toV.z, 0, toV.x);
       /*
       * OK, so this works, but its a hack. We are doing something wrong here but what?
       * */
-      const rotation = new Three.Euler().setFromQuaternion(
-        new Three.Quaternion().setFromUnitVectors(fromV, toV).normalize(), 'XYZ');
+      //const rotation = new Three.Euler().setFromQuaternion(
+      //  new Three.Quaternion().setFromUnitVectors(fromV, toV).normalize(), 'XYZ');
       return {
-        characterPosition: nextPosition,
-        characterRotation: rotation,
+        characterPosition: action.characterNextPosition,
+        characterRotation: state.characterRotation,
+        config: state.config,
       };
     default:
       return state;
