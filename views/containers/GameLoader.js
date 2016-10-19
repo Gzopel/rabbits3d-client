@@ -18,6 +18,7 @@ class GameLoaderComponent extends React.Component {
     this.timeout = setTimeout(() => {
       this.didLoad = true;
       this.forceUpdate();// fake server load
+      clearTimeout(this.timeout);
     }, 2000);
     this.props.dispatch(BrowserActions.addEventListener('Game', 'resize', this.resizeGameScene));
   }
